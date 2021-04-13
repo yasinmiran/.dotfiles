@@ -1,0 +1,122 @@
+# @author: Yasin
+# @description: This is the dotbot configuration file.
+#
+# The configuration file is typically written in YAML,
+# but it can also be written in JSON (which is a subset of YAML). JSON configuration
+# files are conventionally named install.conf.json.
+
+- defaults:
+    link:
+      relink: true
+
+- clean: [ '~' ]
+
+# @command: link
+#
+# Link commands specify how files and directories should be symbolically linked.
+# If desired, items can be specified to be forcibly linked, overwriting existing
+# files if necessary. Environment variables in paths are automatically expanded.
+#
+# What's the format?
+#
+# Link commands are specified as a dictionary mapping targets to source locations.
+# Source locations are specified relative to the base directory
+# (that is specified when running the installer). If linking directories, do not
+# include a trailing slash.
+#
+# Link commands support an optional extended configuration. In this type of
+# configuration, instead of specifying source locations directly, targets are mapped
+# to extended configuration dictionaries.
+#
+# Parameter	        Explanation
+# ------------------------------------------------------------------------------------------------
+# path	            The source for the symlink, the same as in the shortcut syntax (default: null, automatic (see below))
+# create	        When true, create parent directories to the link as needed. (default: false)
+# relink	        Removes the old target if it's a symlink (default: false)
+# force	            Force removes the old target, file or folder, and forces a new link (default: false)
+# relative	        Use a relative path to the source when creating the symlink (default: false, absolute links)
+# canonicalize	    Resolve any symbolic links encountered in the source to symlink to the canonical path (default: true, real paths)
+# glob	            Treat a * character as a wildcard, and perform link operations on all of those matches (default: false)
+# if	            Execute this in your $SHELL and only link if it is successful.
+# ignore-missing	Do not fail if the source is missing and create the link anyway (default: false)
+# exclude	        Array of paths to remove from glob matches. Uses same syntax as path. Ignored if glob is false. (default: empty, keep all matches)
+#
+# Dotbot uses glob.glob to resolve glob paths. However, due to its design, using a glob path such as
+# config/* for example, will not match items that being with .. To specifically capture items that being with ., you
+# will need to use a path like this: config/.*.
+#
+# Example:
+#
+#   - link:
+#     ~/.config/terminator:
+#       create: true
+#       path: config/terminator
+#     ~/.vim: vim
+#     ~/.vimrc:
+#       relink: true
+#       path: vimrc
+#     ~/.zshrc:
+#       force: true
+#       path: zshrc
+#     ~/.hammerspoon:
+#       if: '[ `uname` = Darwin ]'
+#       path: hammerspoon
+#
+# If the source location is omitted or set to null, Dotbot will use the basename of the destination, with a
+# leading . stripped if present. This makes the following two config files equivalent.
+#
+# Explicit sources:
+#
+#   - link:
+#     ~/bin/ack: ack
+#     ~/.vim: vim
+#     ~/.vimrc:
+#       relink: true
+#       path: vimrc
+#     ~/.zshrc:
+#       force: true
+#       path: zshrc
+#     ~/.config/:
+#       glob: true
+#       path: config/*
+#       relink: true
+#       exclude: [ config/Code ]
+#     ~/.config/Code/User/:
+#       create: true
+#       glob: true
+#       path: config/Code/User/*
+#       relink: true
+#
+# Implicit sources:
+#
+#   - link:
+#      ~/bin/ack:
+#      ~/.vim:
+#      ~/.vimrc:
+#        relink: true
+#      ~/.zshrc:
+#        force: true
+#      ~/.config/:
+#        glob: true
+#        path: config/*
+#        relink: true
+#        exclude: [ config/Code ]
+#      ~/.config/Code/User/:
+#        create: true
+#        glob: true
+#        path: config/Code/User/*
+#        relink: true
+
+- link:
+    # ~/.tmux.conf: tmux.conf
+    # ~/.vim: vim
+    # ~/.vimrc: vimrc
+    ~/.zshrc:
+
+- create:
+    - ~/downloads
+    - ~/.vim/undo-history
+
+- shell:
+    - [ git submodule update --init --recursive, Installing submodules ]
+
