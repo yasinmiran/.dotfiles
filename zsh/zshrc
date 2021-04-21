@@ -1,0 +1,164 @@
+#!/usr/bin/env zsh
+
+# MIT License
+#
+# Copyright (c) 2021 Yasin Miran
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+# ======================================================================================
+# ALIASES
+# ======================================================================================
+
+alias ..="cd .."                 # go back one directory
+alias ...="cd ../.."             # go back two directories
+alias ....="cd ../../.."         # go back four directories
+alias .....="cd ../../../.."     # go back five directories
+alias ......="cd ../../../../.." # go back six directories
+alias ~="cd ~"                   # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                # go to old directory == cd $OLDPWD
+
+alias d="cd ~/Documents"         # go to documents
+alias dl="cd ~/Downloads"        # go to downloads
+alias dt="cd ~/Desktop"          # go to desktop
+alias dev="cd ~/Desktop/dev"     # go to dev working directory
+alias bins="cd ~/Desktop/binary" # go to binaries directory
+
+# ======================================================================================
+# EXPORTS
+# ======================================================================================
+
+readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
+readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
+readonly PATH="$PATH:/Users/yasin/binaries/flutter/bin"
+
+export TOMCAT_HOME
+export JAVA_HOME
+export PATH
+
+# ======================================================================================
+# FUNCTIONS
+# ======================================================================================
+
+# A function that ask a question and waits for a
+# YES or NO answer from the stdin.
+function ask() {
+
+  local prompt default reply
+
+  if [[ ${2:-} == 'Y' ]]; then
+    prompt='Y/n'
+    default='Y'
+  elif [[ ${2:-} == 'N' ]]; then
+    prompt='y/N'
+    default='N'
+  else
+    prompt='y/n'
+    default=''
+  fi
+
+  while true; do
+    # Ask the question (not using "read -p" as
+    # it uses stderr not stdout)
+    echo -n "$1 [$prompt] "
+    # Read the answer (use /dev/tty in case stdin is
+    # redirected from somewhere else)
+    read -r reply </dev/tty
+    # Default?
+    if [[ -z $reply ]]; then
+      reply=$default
+    fi
+    # Check if the reply is valid
+    case "$reply" in
+    Y* | y*) return 0 ;;
+    N* | n*) return 1 ;;
+    esac
+  done
+
+}
+
+# Abbreviated: Go up by N number of directories.
+#
+# This function can go up *n number of directories
+# upwards. If you are in a nested folder just executing
+# `$ gupnod 10` will move you up 10 directories.
+function gupnod() {
+
+  # Reference of present working directory
+  local c_dir && c_dir="$(pwd)"
+
+  if [[ "${1}" == "" ]]; then
+    c_dir="$(dirname "${c_dir}")"
+  elif ! [[ "${1}" =~ ^[0-9]{1,2}$ ]]; then
+    echo "Error: argument must be a number"
+  elif ! [[ "${1}" -gt "0" ]]; then
+    echo "Error: argument must be positive"
+  else
+    # Go through each dirname
+    for ((i = 0; i < ${1}; i++)); do
+      local n_cdir && n_cdir="$(dirname "${c_dir}")"
+      if [[ "${c_dir}" == "${n_cdir}" ]]; then
+        break
+      else
+        c_dir="${n_cdir}"
+      fi
+    done
+  fi
+
+  cd "${c_dir}" || exit
+
+}
+
+# Abbreviated: Organize my shit
+#
+# This function can organize the files based on their
+# type. It will create directories with the extension
+# name without conflicting the existing folders.
+function oms() {
+  echo ""
+}
+
+# Abbreviated: Append to $PATH
+#
+# This function will append a path to $PATH
+# and source the self itself.
+function atop() {
+  local path && path=${1}
+  if [[ -n "$path" ]]; then
+    if [[ -d "$path" ]]; then
+      export PATH="$PATH:$path"
+    else
+      echo "Nothing done. The path is not a directory!"
+    fi
+  fi
+}
+
+# Abbreviated: Make directory and Change directory
+#
+# This function will create the given directory and
+# cd into it immediately.
+function mkcd() {
+  mkdir -p "$1" && cd "$1" || exit
+}
+
+# ======================================================================================
+# BOOTSTRAP
+# ======================================================================================
+
+# Place bootstrapping code here...
