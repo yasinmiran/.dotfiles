@@ -22,6 +22,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# Some cool shell variables:
+#
+# $COLUMNS        Number of columns to use in Terminal view
+# $DIRSTACK       List of directories used by the pushd and popd commands
+# $GROUPS         Various groups with which the user is associated
+# $HISTFILE       File containing the shell history
+# $HOME           Home directory for the user
+# $HOSTNAME       Name of the system on which the shell is running
+# $LINES          Number of lines currently being used by the shell
+# $PATH           List of directories the shell uses to resolve commands
+# $PS1            String used as the primary prompt
+# $PS2            String used as the secondary prompt
+# $SHELL          Shell program being used
+# $SHELLOPTS      Options in effect for the shell
+# $TERM           Type of terminal that the shell is displaying its content to
+# $UID            User ID of the currently logged-in user
+# $USER           Username of the currently logged-in user
+# _ (underscore)  Previously executed command
+
 # ======================================================================================
 # ALIASES
 # ======================================================================================
