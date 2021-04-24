@@ -69,6 +69,7 @@ alias exa="exa -laFh --git"      # Alias for default exa
 # EXPORTS
 # ======================================================================================
 
+readonly DOTFILES_DIR="$HOME/.dotfiles"
 readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
 readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 readonly PATH="$PATH:/Users/yasin/binaries/flutter/bin"
@@ -76,6 +77,7 @@ readonly PATH="$PATH:/Users/yasin/binaries/flutter/bin"
 export TOMCAT_HOME
 export JAVA_HOME
 export PATH
+export DOTFILES_DIR
 
 # ======================================================================================
 # FUNCTIONS
