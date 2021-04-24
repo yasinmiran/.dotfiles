@@ -59,6 +59,9 @@ alias dt="cd ~/Desktop"          # go to desktop
 alias dev="cd ~/Desktop/dev"     # go to dev working directory
 alias bins="cd ~/Desktop/binary" # go to binaries directory
 
+alias ls="exa -laFh --git"
+alias exa="exa -laFh --git"
+
 # ======================================================================================
 # EXPORTS
 # ======================================================================================
