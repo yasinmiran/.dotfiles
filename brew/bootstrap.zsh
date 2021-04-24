@@ -79,6 +79,7 @@ export HOMEBREW_CASK_OPTS
 # BOOTSTRAP
 # ======================================================================================
 
-echo -e "Bootstrapping homebrew $BREW_EMOJI" &&
+echo -e "Installing homebrew $BREW_EMOJI" &&
   install_homebrew &&
+  echo -e "Bundling homebrew $BREW_EMOJI" &&
   brew_bundle_all
