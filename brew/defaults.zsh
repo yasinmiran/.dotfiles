@@ -70,12 +70,3 @@ readonly HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 readonly BREW_EMOJI="\xf0\x9f\x8d\xba"
 
 export HOMEBREW_CASK_OPTS
-
-# ======================================================================================
-# BOOTSTRAP
-# ======================================================================================
-
-echo -e "Installing homebrew $BREW_EMOJI" &&
-  install_homebrew &&
-  echo -e "Bundling homebrew $BREW_EMOJI" &&
-  brew_bundle_all
