@@ -69,6 +69,11 @@ alias exa="exa -laFh --git"      # Alias for default exa
 # EXPORTS
 # ======================================================================================
 
+readonly PARTY="🥳"
+readonly ONLY_BREW="🍺"
+readonly TICK="✅"
+readonly LOL="😂"
+
 readonly DOTFILES_DIR="$HOME/.dotfiles"
 readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
 readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
@@ -78,6 +83,7 @@ export TOMCAT_HOME
 export JAVA_HOME
 export PATH
 export DOTFILES_DIR
+export PARTY ONLY_BREW TICK LOL
 
 # ======================================================================================
 # FUNCTIONS
@@ -180,8 +186,21 @@ function mkcd() {
   mkdir -p "$1" && cd "$1" || exit
 }
 
+function goto_dotfiles_dir() {
+  cd "$DOTFILES_DIR" || exit
+}
+
+function load_all_defaults() {
+  echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
+    echo -e "ZSH VERSION: $ZSH_VERSION" &&
+    goto_dotfiles_dir &&
+    source git/defaults.zsh &&
+    source brew/defaults.zsh &&
+    echo -e "$USER's zsh environment is ready $PARTY.\n"
+}
+
 # ======================================================================================
-# BOOTSTRAP
+# BOOTSTRAP THE DEFAULTS
 # ======================================================================================
 
-source git/defaults.zsh
+load_all_defaults
