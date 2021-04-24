@@ -20,18 +20,19 @@
 
     # Link the zsh configuration files to home. It will create
     # the directory and include all the zsh profiles.
-    ~/.zshrc:
+    ~/.zsh:
       create: true
       relink: true
-      path: zsh/zshrc
+      path: zsh/*
       force: true
-
-    ~/.zshenv:
+      glob: true
+      exclude: [ zsh/*.md ]
+    # Link the Homebrew `Brewfile` configuration.
+    ~/Brewfile:
       create: true
       relink: true
-      path: zsh/zshenv
+      path: brew/Brewfile
       force: true
-
     # Link the gitconfig file to home.
     ~/.gitconfig:
       create: true
@@ -52,7 +53,7 @@
       # a new machine we run the install script once. And we don't want to
       # bootstrap brew all the time when a new zsh shell is spawned.
       description: "Bootstrapping homebrew"
-      command: ./brew/bootstrap.zsh
+      command: ./brew/defaults.zsh
       stdout: true
       stderr: true
       stdin: true
