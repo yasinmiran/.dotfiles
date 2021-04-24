@@ -22,8 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -e
-
 # ======================================================================================
 # FUNCTIONS
 # ======================================================================================
@@ -32,8 +30,9 @@ set -e
 # then just update the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
 function install_homebrew() {
-  if ! exists brew; then
+  if exists brew; then
     echo "Nothing done. Homebrew is already installed."
+    return 0
   else
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
@@ -54,13 +53,13 @@ function update_brewfile() {
   local startingDirectory=$PWD
   if [[ $startingDirectory != "$DOTFILES_BREW_DIR" ]]; then
     echo "Navigating to $DOTFILES_BREW_DIR"
-    cd "$DOTFILES_BREW_DIR"
+    cd "$DOTFILES_BREW_DIR" || exit 1
   fi
   echo "Dumping changes to Brewfile"
   brew bundle dump -v --force --describe
   if [[ $startingDirectory != "$DOTFILES_BREW_DIR" ]]; then
     echo "Navigating back to $startingDirectory"
-    cd "$startingDirectory"
+    cd "$startingDirectory" || exit 1
   fi
 }
 
@@ -69,6 +68,12 @@ function update_brewfile() {
 function brew_bundle_all() {
   echo -e "Bundling brew $ONLY_BREW via Brewfile" &&
     brew bundle --verbose
+}
+
+# Install the given formulae and call update_brewfile to add
+# the newly installed to `Brewfile`.
+function briu() {
+  brew install "$1" || exit && update_brewfile
 }
 
 # ======================================================================================
