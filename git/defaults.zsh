@@ -210,11 +210,4 @@ function suwm() {
     gp "origin/$ref"
 }
 
-# ======================================================================================
-# LOAD AUTO COMPLETIONS
-# ======================================================================================
-
-# Load git auto completion
-zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
-fpath=(~/.zsh "$fpath")
-autoload -Uz compinit && compinit
+echo "Loaded git defaults $TICK"

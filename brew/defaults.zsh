@@ -72,7 +72,7 @@ function update_brewfile() {
 # Install all the dependencies using the available `Brewfile`.
 # First it will tap necessary repos and install packages then casks.
 function brew_bundle_all() {
-  echo -e "Bundling brew $BREW_EMOJI via Brewfile" &&
+  echo -e "Bundling brew $ONLY_BREW via Brewfile" &&
     brew bundle --verbose
 }
 
@@ -85,17 +85,9 @@ function brew_bundle_all() {
 # export HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 # https://github.com/Homebrew/homebrew-bundle/issues/474
 readonly HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
-readonly BREW_EMOJI="\xf0\x9f\x8d\xba"
 readonly DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
 
 export DOTFILES_BREW_DIR
 export HOMEBREW_CASK_OPTS
-export BREW_EMOJI
 
-# ======================================================================================
-# DEFAULT BEHAVIOUR ON BOOTSTRAP
-# ======================================================================================
-
-install_homebrew &&
-  update_brewfile &&
-  brew_bundle_all
+echo "Loaded brew defaults $TICK"

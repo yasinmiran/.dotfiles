@@ -17,28 +17,10 @@
     # ~/.tmux.conf: tmux.conf
     # ~/.vim: vim
     # ~/.vimrc: vimrc
-
-    # Link the zsh configuration files to home. It will create
-    # the directory and include all the zsh profiles.
-    ~/.zsh:
-      create: true
-      relink: true
-      path: zsh/*
-      force: true
-      glob: true
-      exclude: [ zsh/*.md ]
-    # Link the Homebrew `Brewfile` configuration.
-    ~/Brewfile:
-      create: true
-      relink: true
-      path: brew/Brewfile
-      force: true
-    # Link the gitconfig file to home.
-    ~/.gitconfig:
-      create: true
-      relink: true
-      path: git/gitconfig
-      force: true
+    ~/.zshrc: zsh/zshrc
+    ~/.zshenv: zsh/zshenv
+    ~/Brewfile: brew/Brewfile
+    ~/.gitconfig: git/gitconfig
 
 - create:
     - ~/downloads
@@ -47,14 +29,4 @@
 - shell:
     - [ git submodule update --init --recursive, "Updating and installing git submodules" ]
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
-
-    - # Bootstrap homebrew.
-      # Why this is added here instead in the zshrc file? When we configure
-      # a new machine we run the install script once. And we don't want to
-      # bootstrap brew all the time when a new zsh shell is spawned.
-      description: "Bootstrapping homebrew"
-      command: ./brew/defaults.zsh
-      stdout: true
-      stderr: true
-      stdin: true
 

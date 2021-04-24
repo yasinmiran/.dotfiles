@@ -22,6 +22,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# How we can group zsh related files in a directory?
+#
+# There is practically only one way it can reliably work and be portable
+# setting $ZDOTDIR in your $HOME/.zshenv and the rest of your configuration
+# in $ZDOTDIR/.... If you only use one specific window manager/desktop
+# environment you could look up their init files and if they are called
+# before the shell session. Since this is not portable we tend to copy
+# the files directly into the $HOME.
+
 # ======================================================================================
 # FUNCTIONS
 # ======================================================================================
