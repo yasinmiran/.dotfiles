@@ -32,7 +32,11 @@ set -e
 # then just update the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
 function install_homebrew() {
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if ! exists brew; then
+    echo "Nothing done. Homebrew is already installed."
+  else
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 }
 
 # This function writes all installed casks/formulae/images/taps
