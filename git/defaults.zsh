@@ -218,9 +218,3 @@ function suwm() {
 zstyle ':completion:*:*:git:*' script ~/.zsh/git-completion.bash
 fpath=(~/.zsh "$fpath")
 autoload -Uz compinit && compinit
-
-# ======================================================================================
-# BOOTSTRAP
-# ======================================================================================
-
-# Place bootstrapping code here...
