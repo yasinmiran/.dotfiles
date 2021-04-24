@@ -31,6 +31,11 @@
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git
 
 alias g="git"
+alias gi="git"
+alias gut="git"
+alias got="git"
+alias gitt="git"
+
 alias ga="git add"
 alias gau="git add --update" # (Also: "git add -u")
 alias gaa="git add --all"
