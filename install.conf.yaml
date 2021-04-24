@@ -20,7 +20,7 @@
 
     # Link the zsh configuration files to home. It will create
     # the directory and include all the zsh profiles.
-    ~/.zsh:
+    ~/.zshrc:
       create: true
       relink: true
       path: zsh/zshrc
@@ -40,4 +40,14 @@
 - shell:
     - [ git submodule update --init --recursive, "Updating and installing git submodules" ]
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
-    - [ ./brew/bootstrap.zsh, "Bootstrapping your homebrew" ]
+
+    - # Bootstrap homebrew.
+      # Why this is added here instead in the zshrc file? When we configure
+      # a new machine we run the install script once. And we don't want to
+      # bootstrap brew all the time when a new zsh shell is spawned.
+      description: "Bootstrapping homebrew"
+      command: ./brew/bootstrap.zsh
+      stdout: true
+      stderr: true
+      stdin: true
+
