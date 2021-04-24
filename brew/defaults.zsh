@@ -51,8 +51,22 @@ function install_homebrew() {
 # @arg --describe dump adds a description comment above each line,
 # unless the dependency does not have a description.
 function update_brewfile() {
-  echo -e "Updating the Brewfile $BREW_EMOJI with descriptions" &&
-    brew dump -v -f --describe
+
+  local startingDirectory=$PWD
+
+  if [[ $startingDirectory != "$DOTFILES_BREW_DIR" ]]; then
+    echo "Navigating to $DOTFILES_BREW_DIR"
+    cd "$DOTFILES_BREW_DIR"
+  fi
+
+  echo "Dumping changes to Brewfile"
+  brew bundle dump -v --force --describe
+
+  if [[ $startingDirectory -eq "$DOTFILES_BREW_DIR" ]]; then
+    echo "Navigating back to $startingDirectory"
+    cd "$startingDirectory"
+  fi
+
 }
 
 # Install all the dependencies using the available `Brewfile`.
@@ -72,5 +86,16 @@ function brew_bundle_all() {
 # https://github.com/Homebrew/homebrew-bundle/issues/474
 readonly HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 readonly BREW_EMOJI="\xf0\x9f\x8d\xba"
+readonly DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
 
+export DOTFILES_BREW_DIR
 export HOMEBREW_CASK_OPTS
+export BREW_EMOJI
+
+# ======================================================================================
+# DEFAULT BEHAVIOUR ON BOOTSTRAP
+# ======================================================================================
+
+install_homebrew &&
+  update_brewfile &&
+  brew_bundle_all
