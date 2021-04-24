@@ -51,6 +51,7 @@ readonly PARTY="🥳"
 readonly ONLY_BREW="🍺"
 readonly TICK="✅"
 readonly LOL="😂"
+
 readonly DEVELOPMENT_DIR="development"
 readonly BINARIES_DIR="binaries"
 readonly DOTFILES_DIR="$HOME/.dotfiles"
@@ -85,6 +86,7 @@ alias bins='cd ~/$BINARIES_DIR'       # go to binaries directory
 
 alias ls="exa -laFh --git"            # Descriptive ls
 alias exa="exa -laFh --git"           # Alias for default exa
+alias cls="clear"                     # Good old cls
 
 # ======================================================================================
 # FUNCTIONS
