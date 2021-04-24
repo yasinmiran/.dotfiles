@@ -147,6 +147,7 @@ alias grh="git reset" # (Also: "git reset HEAD")
 alias grhh="git reset --hard" # (Also: "git reset HEAD --hard")
 alias gpristine="git reset --hard && git clean -dffx"
 alias gru="git reset --"
+alias gupc="git reset HEAD~1" # Undo last commit.
 
 alias gd="git diff"
 alias gdca="git diff --cached"
@@ -164,31 +165,31 @@ alias gbsg="git bisect good"
 alias gbsr="git bisect reset"
 alias gbss="git bisect start"
 
-alias gcount="git shortlog -sn"
-alias gcf="git config --list"
-alias gbl="git blame -b -w"
-alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
-alias gg="git gui citool"
-alias gga="git gui citool --amend"
-alias ghh="git help"
-alias gignore="git update-index --assume-unchanged"
-alias gignored="git ls-files -v"
-alias git='-svn-dcommit-push	git svn dcommit && git push github master:svntrunk'
-alias gk="\gitk --all --branches"
-alias gke='\gitk --all $(git log -g --pretty=%h)'
-alias grs="git restore"
-alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
-alias gsd="git svn dcommit"
-alias gsi="git submodule init"
-alias gsps="git show --pretty=short --show-signature"
-alias gsr="git svn rebase"
-alias gsu="git submodule update"
-alias gts="git tag -s"
-alias gunignore="git update-index --no-assume-unchanged"
-alias gunwip='git log -n 1 | grep -q -c "--wip--" && git reset HEAD~1'
-alias gvt="git verify-tag"
-alias gwch="git whatchanged -p --abbrev-commit --pretty=medium"
-alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
+# alias gcount="git shortlog -sn"
+# alias gcf="git config --list"
+# alias gbl="git blame -b -w"
+# alias gdct='git describe --tags $(git rev-list --tags --max-count=1)'
+# alias gg="git gui citool"
+# alias gga="git gui citool --amend"
+# alias ghh="git help"
+# alias gignore="git update-index --assume-unchanged"
+# alias gignored="git ls-files -v"
+# alias git='-svn-dcommit-push	git svn dcommit && git push github master:svntrunk'
+# alias gk="\gitk --all --branches"
+# alias gke='\gitk --all $(git log -g --pretty=%h)'
+# alias grs="git restore"
+# alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
+# alias gsd="git svn dcommit"
+# alias gsi="git submodule init"
+# alias gsps="git show --pretty=short --show-signature"
+# alias gsr="git svn rebase"
+# alias gsu="git submodule update"
+# alias gts="git tag -s"
+# alias gunignore="git update-index --no-assume-unchanged"
+# alias gunwip='git log -n 1 | grep -q -c "--wip--" && git reset HEAD~1'
+# alias gvt="git verify-tag"
+# alias gwch="git whatchanged -p --abbrev-commit --pretty=medium"
+# alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
 
 # ======================================================================================
 # FUNCTIONS
@@ -203,7 +204,7 @@ function suwm() {
   local ref && ref=${1:-"master"}
   gst &&
     if ask "Stash the changes?" Y; then
-      gsth
+      gsth # Stash the current changes without any message.
     fi &&
     gccd &&
     gco "$ref" &&
