@@ -115,8 +115,7 @@ function ask() {
 
 }
 
-# Abbreviated: Go up by N number of directories.
-#
+# Abbreviated for: Go up by N number of directories.
 # This function can go up *n number of directories
 # upwards. If you are in a nested folder just executing
 # `$ gupnod 10` will move you up 10 directories.
@@ -148,7 +147,6 @@ function gupnod() {
 }
 
 # Abbreviated: Organize my shit
-#
 # This function can organize the files based on their
 # type. It will create directories with the extension
 # name without conflicting the existing folders.
@@ -156,8 +154,7 @@ function oms() {
   echo ""
 }
 
-# Abbreviated: Append to $PATH
-#
+# Abbreviated for: Append to $PATH
 # This function will append a path to $PATH
 # and source the self itself.
 function atop() {
@@ -171,8 +168,7 @@ function atop() {
   fi
 }
 
-# Abbreviated: Make directory and Change directory
-#
+# Abbreviated for: Make directory and Change directory.
 # This function will create the given directory and
 # cd into it immediately.
 function mkcd() {
@@ -183,4 +179,4 @@ function mkcd() {
 # BOOTSTRAP
 # ======================================================================================
 
-# Place bootstrapping code here...
+source git/defaults.zsh
