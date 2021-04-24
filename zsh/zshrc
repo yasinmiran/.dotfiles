@@ -22,8 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -e
-
 # Some cool shell variables:
 #
 # $COLUMNS        Number of columns to use in Terminal view
@@ -41,29 +39,9 @@ set -e
 # $TERM           Type of terminal that the shell is displaying its content to
 # $UID            User ID of the currently logged-in user
 # $USER           Username of the currently logged-in user
+# $PWD            Present working directory
 # _ (underscore)  Previously executed command
 # $?              Previous command exit code 0...127
-
-# ======================================================================================
-# ALIASES
-# ======================================================================================
-
-alias ..="cd .."                 # go back one directory
-alias ...="cd ../.."             # go back two directories
-alias ....="cd ../../.."         # go back four directories
-alias .....="cd ../../../.."     # go back five directories
-alias ......="cd ../../../../.." # go back six directories
-alias ~="cd ~"                   # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                # go to old directory == cd $OLDPWD
-
-alias d="cd ~/Documents"         # go to documents
-alias dl="cd ~/Downloads"        # go to downloads
-alias dt="cd ~/Desktop"          # go to desktop
-alias dev="cd ~/Desktop/dev"     # go to dev working directory
-alias bins="cd ~/Desktop/binary" # go to binaries directory
-
-alias ls="exa -laFh --git"       # Descriptive ls
-alias exa="exa -laFh --git"      # Alias for default exa
 
 # ======================================================================================
 # EXPORTS
@@ -73,17 +51,40 @@ readonly PARTY="🥳"
 readonly ONLY_BREW="🍺"
 readonly TICK="✅"
 readonly LOL="😂"
-
+readonly DEVELOPMENT_DIR="development"
+readonly BINARIES_DIR="binaries"
 readonly DOTFILES_DIR="$HOME/.dotfiles"
 readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
 readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
 readonly PATH="$PATH:/Users/yasin/binaries/flutter/bin"
 
+export DEVELOPMENT_DIR BINARIES_DIR
 export TOMCAT_HOME
 export JAVA_HOME
 export PATH
 export DOTFILES_DIR
 export PARTY ONLY_BREW TICK LOL
+
+# ======================================================================================
+# ALIASES
+# ======================================================================================
+
+alias ..="cd .."                      # go back one directory
+alias ...="cd ../.."                  # go back two directories
+alias ....="cd ../../.."              # go back four directories
+alias .....="cd ../../../.."          # go back five directories
+alias ......="cd ../../../../.."      # go back six directories
+alias ~="cd ~"                        # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                     # go to old directory == cd $OLDPWD
+
+alias d="cd ~/Documents"              # go to documents
+alias dl="cd ~/Downloads"             # go to downloads
+alias dt="cd ~/Desktop"               # go to desktop
+alias dev='cd ~/$DEVELOPMENT_DIR'     # go to dev working directory
+alias bins='cd ~/$BINARIES_DIR'       # go to binaries directory
+
+alias ls="exa -laFh --git"            # Descriptive ls
+alias exa="exa -laFh --git"           # Alias for default exa
 
 # ======================================================================================
 # FUNCTIONS
@@ -162,7 +163,16 @@ function gupnod() {
 # type. It will create directories with the extension
 # name without conflicting the existing folders.
 function oms() {
-  echo ""
+
+  if [[ $PWD == "$HOME/$DEVELOPMENT_DIR" ]] || [[ $PWD == "$HOME/$BINARIES_DIR" ]]; then
+    echo "Illegal operation. You cannot operate 'oms' on development or binaries directories!"
+    return 0
+  fi
+  if [[ $PWD == "$HOME" ]]; then
+    echo "Forbidden operation. You cannot operate 'oms' on home dir $LOL."
+    return 0
+  fi
+
 }
 
 # Abbreviated for: Append to $PATH
@@ -186,21 +196,23 @@ function mkcd() {
   mkdir -p "$1" && cd "$1" || exit
 }
 
+# This function will navigate to the dotfiles directory
+# from any directory. Instead of having to issue cd and
+# the path just calling this is easier.
 function goto_dotfiles_dir() {
   cd "$DOTFILES_DIR" || exit
 }
 
-function load_all_defaults() {
-  echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
-    echo -e "ZSH VERSION: $ZSH_VERSION" &&
-    goto_dotfiles_dir &&
-    source git/defaults.zsh &&
-    source brew/defaults.zsh &&
-    echo -e "$USER's zsh environment is ready $PARTY.\n"
-}
-
 # ======================================================================================
-# BOOTSTRAP THE DEFAULTS
+# SOURCE ALL THE DEFAULT CONFIGURATIONS
+#
+# Below this section is dedicated to source all the necessary environment and other
+# source files for zsh.
 # ======================================================================================
 
-load_all_defaults
+echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
+  echo -e "ZSH VERSION: $ZSH_VERSION" &&
+  goto_dotfiles_dir &&
+  source git/defaults.zsh &&
+  source brew/defaults.zsh &&
+  echo -e "$USER's zsh environment is ready $PARTY.\n"

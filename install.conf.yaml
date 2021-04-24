@@ -10,6 +10,7 @@
 - defaults:
     link:
       relink: true
+      force: true
 
 - clean: [ '~' ]
 
@@ -23,10 +24,12 @@
     ~/.gitconfig: git/gitconfig
 
 - create:
-    - ~/downloads
-    - ~/.vim/undo-history
+    - ~/development
+    - ~/development
+    # - ~/.vim/undo-history
 
 - shell:
     - [ git submodule update --init --recursive, "Updating and installing git submodules" ]
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
+    - [ ./bootstrap.zsh, "Bootstrapping your machine" ]
 

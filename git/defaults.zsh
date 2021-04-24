@@ -32,9 +32,11 @@
 
 alias g="git"
 alias gi="git"
+alias gt="git"
 alias gut="git"
 alias got="git"
 alias gitt="git"
+alias hit="git" # LOL trust me I've done this before.
 
 alias ga="git add"
 alias gau="git add --update" # (Also: "git add -u")
