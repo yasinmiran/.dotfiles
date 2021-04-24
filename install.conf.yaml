@@ -2,9 +2,8 @@
 # @description: dotbot configuration file.
 #
 # The configuration file is typically written in YAML,
-# but it can also be written in JSON (which is a subset of YAML). JSON configuration
-# files are conventionally named install.zsh.conf.json.
-#
+# but it can also be written in JSON (which is a subset of YAML).
+# JSON configuration files are conventionally named install.zsh.conf.json.
 # Go read the docs: https://github.com/anishathalye/dotbot
 
 - defaults:
@@ -20,16 +19,13 @@
     # ~/.vimrc: vimrc
     ~/.zshrc: zsh/zshrc
     ~/.zshenv: zsh/zshenv
-    ~/Brewfile: brew/Brewfile
     ~/.gitconfig: git/gitconfig
+    ~/Brewfile: brew/Brewfile
 
 - create:
     - ~/development
-    - ~/development
+    - ~/binaries
     # - ~/.vim/undo-history
 
 - shell:
-    - [ git submodule update --init --recursive, "Updating and installing git submodules" ]
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
-    - [ ./bootstrap.zsh, "Bootstrapping your machine" ]
-
