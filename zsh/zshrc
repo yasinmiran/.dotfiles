@@ -42,6 +42,7 @@ set -e
 # $UID            User ID of the currently logged-in user
 # $USER           Username of the currently logged-in user
 # _ (underscore)  Previously executed command
+# $?              Previous command exit code 0...127
 
 # ======================================================================================
 # ALIASES
@@ -61,8 +62,8 @@ alias dt="cd ~/Desktop"          # go to desktop
 alias dev="cd ~/Desktop/dev"     # go to dev working directory
 alias bins="cd ~/Desktop/binary" # go to binaries directory
 
-alias ls="exa -laFh --git"
-alias exa="exa -laFh --git"
+alias ls="exa -laFh --git"       # Descriptive ls
+alias exa="exa -laFh --git"      # Alias for default exa
 
 # ======================================================================================
 # EXPORTS
