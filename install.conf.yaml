@@ -26,6 +26,12 @@
       path: zsh/zshrc
       force: true
 
+    ~/.zshenv:
+      create: true
+      relink: true
+      path: zsh/zshenv
+      force: true
+
     # Link the gitconfig file to home.
     ~/.gitconfig:
       create: true
