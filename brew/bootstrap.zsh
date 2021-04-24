@@ -32,11 +32,7 @@ set -e
 # then just update the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
 function install_homebrew() {
-  if [[ $(which -s brew) != 0 ]]; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  else
-    echo -e "Download skipped. Brew $BREW_EMOJI is already installed."
-  fi
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 }
 
 # This function writes all installed casks/formulae/images/taps
