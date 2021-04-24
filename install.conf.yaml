@@ -23,12 +23,15 @@
     ~/.zsh:
       create: true
       relink: true
-      path: zsh/*
-      glob: true
+      path: zsh/zshrc
       force: true
-      exclude: [ 'zsh/zprofile' ]
 
-#    ~/.gitconfig:
+    # Link the gitconfig file to home.
+    ~/.gitconfig:
+      create: true
+      relink: true
+      path: git/gitconfig
+      force: true
 
 - create:
     - ~/downloads
