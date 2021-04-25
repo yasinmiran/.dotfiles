@@ -22,6 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# ======================================================================================
+# Functions
+# ======================================================================================
+
 function __macos_bootstrap__() {
   echo "Setting up your mac..."
 }

@@ -61,4 +61,4 @@ function suwm() {
 # Default Command Executions
 # ======================================================================================
 
-echo "Loaded git defaults $TICK"
+echo "Loaded git defaults ✅"

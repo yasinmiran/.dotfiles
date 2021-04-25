@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 # ======================================================================================
-# FUNCTIONS
+# Functions
 # ======================================================================================
 
 # This the bootstrapper function for homebrew. This shouldn't
@@ -78,19 +78,18 @@ function briu() {
 }
 
 # ======================================================================================
-# EXPORTS
+# Exports
 # ======================================================================================
 
-# TODO: Keep an eye out for a different `--no-quarantine` solution.
 # Currently, you can't do `brew bundle --no-quarantine` as an option.
 # export HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 # https://github.com/Homebrew/homebrew-bundle/issues/474
-readonly HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
-readonly DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
-readonly HOMEBREW_BUNDLE_FILE="$DOTFILES_BREW_DIR/Brewfile"
+export HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
+export DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
+export HOMEBREW_BUNDLE_FILE="$DOTFILES_BREW_DIR/Brewfile"
 
-export DOTFILES_BREW_DIR
-export HOMEBREW_CASK_OPTS
-export HOMEBREW_BUNDLE_FILE
+# ======================================================================================
+# Default Command Executions
+# ======================================================================================
 
-echo "Loaded brew defaults $TICK"
+echo "Loaded brew defaults ✅"

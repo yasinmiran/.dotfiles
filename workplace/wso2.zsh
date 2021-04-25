@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 # ======================================================================================
-# FUNCTIONS
+# Functions
 # ======================================================================================
 
 # Abbreviated for: build_identity_apps
@@ -45,8 +45,8 @@ function bia() {
 # Abbreviated for: start wso2 server
 #
 # Usually executed as ./wso2server.sh with this function
-# I can execute `$ sws 9443` with a custom port offset
-# which is handled for me internally.
+# I can execute `$ sws 9443` with a custom port and offset
+# calculation is handled for me internally.
 function sws() {
   local port abs && port=${1:-9443} && abs=$((9443 - port))
   if ((abs > 0)); then
@@ -54,7 +54,6 @@ function sws() {
   else
     abs=${abs#-}
   fi
-  readonly heart_emoji="\xf0\x9f\xa5\xb3\x0a" &&
-    echo -e "Starting wso2is server $heart_emoji with port offset: $abs => $port" &&
+  echo -e "Starting wso2is server with port offset: $abs => $port" &&
     ./wso2server.sh "-DportOffset=$abs"
 }

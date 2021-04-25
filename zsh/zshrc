@@ -44,30 +44,126 @@
 # $?              Previous command exit code 0...127
 
 # ======================================================================================
-# EXPORTS
+# Oh-My-Zsh Configurations
 # ======================================================================================
 
-readonly PARTY="🥳"
-readonly ONLY_BREW="🍺"
-readonly TICK="✅"
-readonly LOL="😂"
+# Path to oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-readonly DEVELOPMENT_DIR="$HOME/development"
-readonly BINARIES_DIR="$HOME/binaries"
-readonly DOTFILES_DIR="$HOME/.dotfiles"
-readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
-readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
-readonly PATH="$PATH:/Users/yasin/binaries/flutter/bin"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+export ZSH_THEME="robbyrussell"
 
-export DEVELOPMENT_DIR BINARIES_DIR
-export TOMCAT_HOME
-export JAVA_HOME
-export PATH
-export DOTFILES_DIR
-export PARTY ONLY_BREW TICK LOL
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+#
+# You can set one of the optional three formats:
+# "mm/dd/yyyy", "dd.mm.yyyy", "yyyy-mm-dd" or set a custom format using the
+# strftime function format specifications, see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ======================================================================================
-# ALIASES
+# Exports
+# ======================================================================================
+
+export PARTY="🥳"
+export ONLY_BREW="🍺"
+export TICK="✅"
+export LOL="😂"
+
+export DEVELOPMENT_DIR="$HOME/development"
+export BINARIES_DIR="$HOME/binaries"
+export DOTFILES_DIR="$HOME/.dotfiles"
+export TOMCAT_HOME="/Users/yasin/Desktop/apache-tomcat-9.0.43/"
+export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
+export PATH="$PATH:/Users/yasin/binaries/flutter/bin"
+
+# ======================================================================================
+# Aliases
 # ======================================================================================
 
 alias ..="cd .."                      # go back one directory
@@ -89,45 +185,8 @@ alias exa="exa -laFh --git"           # Alias for default exa
 alias cls="clear"                     # Good old cls
 
 # ======================================================================================
-# FUNCTIONS
+# Functions
 # ======================================================================================
-
-# A function that ask a question and waits for a
-# YES or NO answer from the stdin.
-function ask() {
-
-  local prompt default reply
-
-  if [[ ${2:-} == 'Y' ]]; then
-    prompt='Y/n'
-    default='Y'
-  elif [[ ${2:-} == 'N' ]]; then
-    prompt='y/N'
-    default='N'
-  else
-    prompt='y/n'
-    default=''
-  fi
-
-  while true; do
-    # Ask the question (not using "read -p" as
-    # it uses stderr not stdout)
-    echo -n "$1 [$prompt] "
-    # Read the answer (use /dev/tty in case stdin is
-    # redirected from somewhere else)
-    read -r reply </dev/tty
-    # Default?
-    if [[ -z $reply ]]; then
-      reply=$default
-    fi
-    # Check if the reply is valid
-    case "$reply" in
-    Y* | y*) return 0 ;;
-    N* | n*) return 1 ;;
-    esac
-  done
-
-}
 
 # Abbreviated for: Go up by N number of directories.
 # This function can go up *n number of directories
@@ -198,22 +257,24 @@ function mkcd() {
   mkdir -p "$1" && cd "$1" || exit
 }
 
+# Abbreviated for: Go to dotfiles directory
 # This function will navigate to the dotfiles directory
 # from any directory. Instead of having to issue cd and
 # the path just calling this is easier.
-function goto_dotfiles_dir() {
+function gtdfd() {
   cd "$DOTFILES_DIR" || exit
 }
 
 # ======================================================================================
-# SOURCE ALL THE DEFAULT CONFIGURATIONS
+# Default Command Executions
 #
 # Below this section is dedicated to source all the necessary environment and other
-# source files for zsh.
+# source files for zsh. Note that some of the oh-my-zsh related ones are also sourced
+# here to ensure consistency across files.
 # ======================================================================================
 
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
   echo -e "ZSH VERSION: $ZSH_VERSION" &&
   source "$DOTFILES_DIR/git/defaults.zsh" &&
   source "$DOTFILES_DIR/brew/defaults.zsh" &&
-  echo -e "$USER's zsh environment is ready $PARTY.\n"
+  echo -e "$USER's zsh environment is ready to $PARTY.\n"
