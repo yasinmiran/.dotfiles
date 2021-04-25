@@ -1,9 +1,32 @@
+# MIT License
+#
+# Copyright (c) 2021 Yasin Miran
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 # @author: Yasin
 # @description: dotbot configuration file.
 #
 # The configuration file is typically written in YAML,
 # but it can also be written in JSON (which is a subset of YAML).
 # JSON configuration files are conventionally named install.zsh.conf.json.
+#
 # Go read the docs: https://github.com/anishathalye/dotbot
 
 - defaults:
@@ -23,13 +46,15 @@
     ~/Brewfile: brew/Brewfile
 
 - create:
-    - ~/development
-    - ~/binaries
+    - ~/development # This should be same as the one in zshrc
+    - ~/binaries    # This should be same as the one in zshrc
     # - ~/.vim/undo-history
 
 - shell:
+    - [ git submodule update --init --recursive, "Installing submodules" ]
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
     - [ source zsh/zshrc, "Sourcing the zshrc file before bootstrapping" ]
+
     - # Bootstrap homebrew.
       # First it will source the defaults from brew directory
       # to ensure the functions are sourced properly.
