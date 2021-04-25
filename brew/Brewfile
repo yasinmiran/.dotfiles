@@ -36,3 +36,6 @@ cask "adoptopenjdk8"
 cask "git-credential-manager-core"
 # Open-source keystroke visualizer
 cask "keycastr"
+mas "Bitwarden", id: 1352778147
+mas "Gifski", id: 1351639930
+mas "iMovie", id: 408981434

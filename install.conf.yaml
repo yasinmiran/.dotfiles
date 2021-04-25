@@ -29,3 +29,11 @@
 
 - shell:
     - [ chsh -s $(which zsh), "Making zsh the default shell" ]
+    - [ source zsh/zshrc, "Sourcing the zshrc file before bootstrapping" ]
+    - # Bootstrap homebrew.
+      # First it will source the defaults from brew directory
+      # to ensure the functions are sourced properly.
+      command: source brew/defaults.zsh && __brew_bootstrap__
+      stdin: true
+      stdout: true
+      stderr: true

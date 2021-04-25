@@ -26,6 +26,12 @@
 # FUNCTIONS
 # ======================================================================================
 
+function __brew_bootstrap__() {
+  install_homebrew &&
+    brew_bundle_all &&
+    update_brewfile
+}
+
 # Install homebrew via curl. If brew is already installed
 # then just update the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
@@ -50,17 +56,8 @@ function install_homebrew() {
 # @arg --describe dump adds a description comment above each line,
 # unless the dependency does not have a description.
 function update_brewfile() {
-  local startingDirectory=$PWD
-  if [[ $startingDirectory != "$DOTFILES_BREW_DIR" ]]; then
-    echo "Navigating to $DOTFILES_BREW_DIR"
-    cd "$DOTFILES_BREW_DIR" || exit 1
-  fi
-  echo "Dumping changes to Brewfile"
-  brew bundle dump -v --force --describe
-  if [[ $startingDirectory != "$DOTFILES_BREW_DIR" ]]; then
-    echo "Navigating back to $startingDirectory"
-    cd "$startingDirectory" || exit 1
-  fi
+  echo "Dumping changes to Brewfile" &&
+    brew bundle dump -v --force --describe
 }
 
 # Install all the dependencies using the available `Brewfile`.
@@ -86,8 +83,10 @@ function briu() {
 # https://github.com/Homebrew/homebrew-bundle/issues/474
 readonly HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 readonly DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
+readonly HOMEBREW_BUNDLE_FILE="$DOTFILES_BREW_DIR/Brewfile"
 
 export DOTFILES_BREW_DIR
 export HOMEBREW_CASK_OPTS
+export HOMEBREW_BUNDLE_FILE
 
 echo "Loaded brew defaults $TICK"
