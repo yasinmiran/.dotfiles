@@ -52,8 +52,8 @@ readonly ONLY_BREW="🍺"
 readonly TICK="✅"
 readonly LOL="😂"
 
-readonly DEVELOPMENT_DIR="development"
-readonly BINARIES_DIR="binaries"
+readonly DEVELOPMENT_DIR="$HOME/development"
+readonly BINARIES_DIR="$HOME/binaries"
 readonly DOTFILES_DIR="$HOME/.dotfiles"
 readonly TOMCAT_HOME=/Users/yasin/Desktop/apache-tomcat-9.0.43/
 readonly JAVA_HOME=$(/usr/libexec/java_home -v1.8)
@@ -81,8 +81,8 @@ alias -- -="cd -"                     # go to old directory == cd $OLDPWD
 alias d="cd ~/Documents"              # go to documents
 alias dl="cd ~/Downloads"             # go to downloads
 alias dt="cd ~/Desktop"               # go to desktop
-alias dev='cd ~/$DEVELOPMENT_DIR'     # go to dev working directory
-alias bins='cd ~/$BINARIES_DIR'       # go to binaries directory
+alias dev='cd $DEVELOPMENT_DIR'       # go to dev working directory
+alias bins='cd $BINARIES_DIR'         # go to binaries directory
 
 alias ls="exa -laFh --git"            # Descriptive ls
 alias exa="exa -laFh --git"           # Alias for default exa
@@ -166,7 +166,7 @@ function gupnod() {
 # name without conflicting the existing folders.
 function oms() {
 
-  if [[ $PWD == "$HOME/$DEVELOPMENT_DIR" ]] || [[ $PWD == "$HOME/$BINARIES_DIR" ]]; then
+  if [[ $PWD == "$DEVELOPMENT_DIR" ]] || [[ $PWD == "$BINARIES_DIR" ]]; then
     echo "Illegal operation. You cannot operate 'oms' on development or binaries directories!"
     return 0
   fi
@@ -214,7 +214,6 @@ function goto_dotfiles_dir() {
 
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
   echo -e "ZSH VERSION: $ZSH_VERSION" &&
-  goto_dotfiles_dir &&
-  source git/defaults.zsh &&
-  source brew/defaults.zsh &&
+  source "$DOTFILES_DIR/git/defaults.zsh" &&
+  source "$DOTFILES_DIR/brew/defaults.zsh" &&
   echo -e "$USER's zsh environment is ready $PARTY.\n"
