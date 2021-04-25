@@ -26,6 +26,10 @@
 # FUNCTIONS
 # ======================================================================================
 
+# This the bootstrapper function for homebrew. This shouldn't
+# be called everytime (although its fine). This function is
+# intended to call from dotbot shell configuration to bootstrap
+# a new machine.
 function __brew_bootstrap__() {
   install_homebrew &&
     brew_bundle_all &&
