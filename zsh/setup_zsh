@@ -26,11 +26,13 @@
 chsh -s "$(which zsh)"
 
 # Install oh-my-zsh and required extensions.
-if exists omz; then
+if [[ -d "$OMZ_INSTALLATION_PATH" ]]; then
   echo "Oh-My-Zsh is already installed." &&
     if ask "Do you want to update it?" Y; then
       omz update
     fi
 else
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
+  unset url
 fi

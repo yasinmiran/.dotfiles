@@ -56,7 +56,6 @@
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - [ source zsh/zshrc, "Sourcing the zshrc file before bootstrapping" ] # Mandatory for setup scripts.
     - # Setup my zsh terminal.
       command: ./zsh/setup_zsh
     - # Bootstrap homebrew.
