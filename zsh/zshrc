@@ -22,6 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# ======================================================================================
+# Exports
+# ======================================================================================
+
 # Some cool shell variables:
 #
 # $COLUMNS        Number of columns to use in Terminal view
@@ -42,10 +46,6 @@
 # $PWD            Present working directory
 # _ (underscore)  Previously executed command
 # $?              Previous command exit code 0...127
-
-# ======================================================================================
-# Exports
-# ======================================================================================
 
 export DEVELOPMENT_DIR="$HOME/development"
 export BINARIES_DIR="$HOME/binaries"
@@ -78,6 +78,11 @@ alias bins='cd $BINARIES_DIR'         # go to binaries directory
 alias ls="exa -laFh --git"            # Descriptive ls
 alias exa="exa -laFh --git"           # Alias for default exa
 alias cls="clear"                     # Good old cls
+
+# Since we use oh-my-zsh there will lots of aliases loaded
+# to the env. However, I want some commands the way I want
+# so I'm overriding the similar existing ones with mine.
+PERSONAL_ALIASES=$(alias -L)
 
 # ======================================================================================
 # Functions
@@ -167,10 +172,13 @@ function gtdfd() {
 # here to ensure consistency across files.
 # ======================================================================================
 
-echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
-  echo -e "ZSH VERSION: $ZSH_VERSION" &&
-  source "$DOTFILES_DIR/git/defaults" &&
-  source "$DOTFILES_DIR/brew/defaults" &&
-  source "$DOTFILES_DIR/zsh/oh_my_zsh" &&
-  source "$DOTFILES_DIR/workplace/wso2" &&
-  echo -e "$USER's zsh environment is ready to 🥳.\n"
+echo -e "\nA new $(ps -o comm= $$) session created with pid $$"
+echo -e "ZSH VERSION: $ZSH_VERSION"
+. "$DOTFILES_DIR/zsh/oh_my_zsh"
+. "$DOTFILES_DIR/git/defaults"
+. "$DOTFILES_DIR/brew/defaults"
+. "$DOTFILES_DIR/workplace/wso2"
+# Now evaluate and add my aliases.
+eval "$PERSONAL_ALIASES"
+unset PERSONAL_ALIASES
+echo -e "$USER's zsh environment is ready to 🥳.\n"
