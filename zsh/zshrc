@@ -275,6 +275,6 @@ function gtdfd() {
 
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$" &&
   echo -e "ZSH VERSION: $ZSH_VERSION" &&
-  source "$DOTFILES_DIR/git/defaults.zsh" &&
-  source "$DOTFILES_DIR/brew/defaults.zsh" &&
+  source "$DOTFILES_DIR/git/defaults" &&
+  source "$DOTFILES_DIR/brew/defaults" &&
   echo -e "$USER's zsh environment is ready to $PARTY.\n"

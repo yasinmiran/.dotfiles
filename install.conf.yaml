@@ -44,8 +44,8 @@
     # ~/.tmux.conf: tmux.conf
     # ~/.vim: vim
     # ~/.vimrc: vimrc
-    ~/.zshrc: zsh/zshrc
     ~/.zshenv: zsh/zshenv
+    ~/.zshrc: zsh/zshrc
     ~/.gitconfig: git/gitconfig
     ~/Brewfile: brew/Brewfile
 
