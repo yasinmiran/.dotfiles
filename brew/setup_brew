@@ -29,7 +29,7 @@
 # First source the brew related default configurations to the shell environment.
 # We can ensure that zshrc variables are in the env because we source it after
 # linking. See dotbot config for `source zsh/zshrc` shell command.
-source "$DOTFILES_DIR/brew/defaults.zsh"
+source "$DOTFILES_DIR/brew/defaults"
 
 # Install homebrew via curl. If brew is already installed then just update
 # the packages and exit.
@@ -43,5 +43,5 @@ fi
 # By default when after a successful brew installation we will bundle the
 # packages using the Brewfile.
 
-brew_bundle_all && # Re-instate the packages, casks, and mas.
-  update_brewfile # Update the Brewfile once again.
+brba && # Re-instate the packages, casks, and mas.
+  brubf # Update the Brewfile once again.

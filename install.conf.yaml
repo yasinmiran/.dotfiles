@@ -60,4 +60,4 @@
     - # Setup my zsh terminal.
       command: ./zsh/setup_zsh
     - # Bootstrap homebrew.
-      command: ./brew/setup_zsh
+      command: ./brew/setup_brew
