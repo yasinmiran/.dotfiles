@@ -26,28 +26,6 @@
 # Functions
 # ======================================================================================
 
-# This the bootstrapper function for homebrew. This shouldn't
-# be called everytime (although its fine). This function is
-# intended to call from dotbot shell configuration to bootstrap
-# a new machine.
-function __brew_bootstrap__() {
-  install_homebrew &&
-    brew_bundle_all &&
-    update_brewfile
-}
-
-# Install homebrew via curl. If brew is already installed
-# then just update the packages and exit.
-# Documentation: https://docs.brew.sh/Installation
-function install_homebrew() {
-  if exists brew; then
-    echo "Nothing done. Homebrew is already installed."
-    return 0
-  else
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-}
-
 # This function writes all installed casks/formulae/images/taps
 # into a `Brewfile` in the current directory.
 #
@@ -59,22 +37,23 @@ function install_homebrew() {
 #
 # @arg --describe dump adds a description comment above each line,
 # unless the dependency does not have a description.
-function update_brewfile() {
-  echo "Dumping changes to Brewfile" &&
+function brubf() {
+  echo "Dumping changes to Brewfile..." &&
     brew bundle dump -v --force --describe
 }
 
 # Install all the dependencies using the available `Brewfile`.
 # First it will tap necessary repos and install packages then casks.
-function brew_bundle_all() {
-  echo -e "Bundling brew $ONLY_BREW via Brewfile" &&
+function brba() {
+  echo -e "Bundling your brew via Brewfile" &&
     brew bundle --verbose
 }
 
 # Install the given formulae and call update_brewfile to add
 # the newly installed to `Brewfile`.
 function briu() {
-  brew install "$1" || exit && update_brewfile
+  brew install "$1" || exit &&
+    update_brewfile
 }
 
 # ======================================================================================
@@ -92,4 +71,4 @@ export HOMEBREW_BUNDLE_FILE="$DOTFILES_BREW_DIR/Brewfile"
 # Default Command Executions
 # ======================================================================================
 
-echo "Loaded brew defaults ✅"
+echo "Loaded homebrew defaults ✅"

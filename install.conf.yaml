@@ -33,6 +33,10 @@
     link:
       relink: true
       force: true
+    shell:
+      stdout: true
+      stdin: true
+      stderr: true
 
 - clean: [ '~' ]
 
@@ -52,13 +56,8 @@
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - [ chsh -s $(which zsh), "Making zsh the default shell" ]
-    - [ source zsh/zshrc, "Sourcing the zshrc file before bootstrapping" ]
-
+    - [ source zsh/zshrc, "Sourcing the zshrc file before bootstrapping" ] # Mandatory for setup scripts.
+    - # Setup my zsh terminal.
+      command: ./zsh/setup_zsh
     - # Bootstrap homebrew.
-      # First it will source the defaults from brew directory
-      # to ensure the functions are sourced properly.
-      command: source brew/defaults.zsh && __brew_bootstrap__
-      stdin: true
-      stdout: true
-      stderr: true
+      command: ./brew/setup_zsh

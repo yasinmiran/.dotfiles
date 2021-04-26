@@ -22,38 +22,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# ======================================================================================
-# Functions
-# ======================================================================================
+# This file contains the bootstrap logic for homebrew. This shouldn't be called
+# everytime (although its fine). These commands, rather setup.zsh file intended
+# to call from dotbot shell configuration when configuring a new machine.
 
-# Abbreviated for: build_identity_apps
-#
-# Build identity-apps sub modules. For example
-# I can pass `$ bia core theme console` to just build
-# those three modules.
-function bia() {
-  local modules
-  modules=("$@")
-  for mod in "${modules[@]}"; do
-    echo "building $mod..."
-    if [[ -n "$mod" ]]; then
-      npx lerna run --scope @wso2is/"$mod" build
-    fi
-  done
-}
+# First source the brew related default configurations to the shell environment.
+# We can ensure that zshrc variables are in the env because we source it after
+# linking. See dotbot config for `source zsh/zshrc` shell command.
+source "$DOTFILES_DIR/brew/defaults.zsh"
 
-# Abbreviated for: start wso2 server
-#
-# Usually executed as ./wso2server.sh with this function
-# I can execute `$ sws 9443` with a custom port and offset
-# calculation is handled for me internally.
-function sws() {
-  local port abs && port=${1:-9443} && abs=$((9443 - port))
-  if ((abs > 0)); then
-    abs="-$abs"
-  else
-    abs=${abs#-}
-  fi
-  echo -e "Starting wso2is server with port offset: $abs => $port" &&
-    ./wso2server.sh "-DportOffset=$abs"
-}
+# Install homebrew via curl. If brew is already installed then just update
+# the packages and exit.
+# Documentation: https://docs.brew.sh/Installation
+if exists brew; then
+  echo "Nothing done. Homebrew is already installed."
+else
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# By default when after a successful brew installation we will bundle the
+# packages using the Brewfile.
+
+brew_bundle_all && # Re-instate the packages, casks, and mas.
+  update_brewfile # Update the Brewfile once again.
