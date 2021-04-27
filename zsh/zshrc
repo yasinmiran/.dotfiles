@@ -61,23 +61,24 @@ export PATH="$PATH:/Users/yasin/binaries/flutter/bin"
 # Aliases
 # ======================================================================================
 
-alias ..="cd .."                      # go back one directory
-alias ...="cd ../.."                  # go back two directories
-alias ....="cd ../../.."              # go back four directories
-alias .....="cd ../../../.."          # go back five directories
-alias ......="cd ../../../../.."      # go back six directories
-alias ~="cd ~"                        # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                     # go to old directory == cd $OLDPWD
+alias ..="cd .."                 # go back one directory
+alias ...="cd ../.."             # go back two directories
+alias ....="cd ../../.."         # go back four directories
+alias .....="cd ../../../.."     # go back five directories
+alias ......="cd ../../../../.." # go back six directories
+alias ~="cd ~"                   # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                # go to old directory == cd $OLDPWD
 
-alias d="cd ~/Documents"              # go to documents
-alias dl="cd ~/Downloads"             # go to downloads
-alias dt="cd ~/Desktop"               # go to desktop
-alias dev='cd $DEVELOPMENT_DIR'       # go to dev working directory
-alias bins='cd $BINARIES_DIR'         # go to binaries directory
+alias d="cd ~/Documents"        # go to documents
+alias dl="cd ~/Downloads"       # go to downloads
+alias dt="cd ~/Desktop"         # go to desktop
+alias dev='cd $DEVELOPMENT_DIR' # go to dev working directory
+alias bins='cd $BINARIES_DIR'   # go to binaries directory
 
-alias ls="exa -laFh --git"            # Descriptive ls
-alias exa="exa -laFh --git"           # Alias for default exa
-alias cls="clear"                     # Good old cls
+alias ls="exa -laFh --git"  # Descriptive ls
+alias exa="exa -laFh --git" # Alias for default exa
+alias cls="clear"           # Good old cls
+alias rrr="exec zsh"        # Relaunch zsh
 
 # Since we use oh-my-zsh there will lots of aliases loaded
 # to the env. However, I want some commands the way I want
@@ -120,20 +121,52 @@ function gupnod() {
 }
 
 # Abbreviated: Organize my shit
-# This function can organize the files based on their
-# type. It will create directories with the extension
-# name without conflicting the existing folders.
+#
+# This function can organize the files based on their type. It is very
+# much similar to macOS stacks however, it will create directories with
+# the extension name instead of their category type.
+#
+# This function can operate without conflicting the existing folders.
+# FIXME: this function is still WIP
 function oms() {
 
   if [[ $PWD == "$DEVELOPMENT_DIR" ]] || [[ $PWD == "$BINARIES_DIR" ]]; then
     echo "Illegal operation. You cannot operate 'oms' on development or binaries directories!"
     return 0
   fi
-
   if [[ $PWD == "$HOME" ]]; then
     echo "Forbidden operation. You cannot operate 'oms' on home dir 😂."
     return 0
   fi
+
+  local cdir=$PWD
+
+  for i in "$cdir"/*; do
+
+    # if its a directory then we won't recurse instead,
+    # we will put it into a dir called `stacks_dirs`.
+    if is_directory "$i"; then
+      mkdir -p "$cdir/stacks_dirs"
+      echo "Moving $i to $cdir/stacks_dirs"
+      continue
+      # mv "$i" "$cdir/stacks_dirs/"
+    fi
+
+    if is_file "$i"; then
+      ext=$(get_file_extension "$i")
+      echo "File extension is $ext"
+      if [[ -n "$ext" ]] && [ "$ext" != "." ]; then
+        mkdir -p "$cdir/$ext"
+        echo "Moving $i to $cdir/$ext/"
+        # mv "$i" "$cdir/$ext/"
+      else
+        mkdir -p "$cdir/stacks_no_ext"
+        echo "Moving $i to $cdir/stacks_no_ext/"
+        # mv "$i" "$cdir/stacks_no_ext/"
+      fi
+    fi
+
+  done
 
 }
 
