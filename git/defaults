@@ -30,10 +30,10 @@
 # I will be using their git plugin. So, check the cheatsheet.
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git
 
-alias gstash="git stash" # For some reason cheatsheet doesn't default stash.
-alias gp="git push" # For some reason cheatsheet doesn't default push.
-alias gpristinesoft="git clean -dffx" # Clears all untracked files.
-alias gundo="git reset HEAD~1" # Undo last commit.
+alias gstash="git stash"             # default stash.
+alias gp="git push"                  # default push.
+alias gpristinesoft="git clean -dff" # Clears all untracked files.
+alias gundo="git reset HEAD~1"       # Undo last commit.
 
 # ======================================================================================
 # Functions
@@ -47,14 +47,12 @@ alias gundo="git reset HEAD~1" # Undo last commit.
 function suwm() {
   local ref && ref=${1:-"master"}
   gst &&
-    if ask "Stash the changes?" Y; then
-      gstash
-    fi &&
+    gstash &&
     gpristinesoft &&
     gco "$ref" &&
     gf "upstream" &&
     grb "upstream/$ref" &&
-    gp "origin/$ref"
+    gp "origin" "$ref"
 }
 
 # ======================================================================================
