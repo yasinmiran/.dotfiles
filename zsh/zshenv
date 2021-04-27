@@ -91,3 +91,27 @@ function ask() {
   done
 
 }
+
+function is_directory() {
+  if [[ -n $1 ]] && [[ -d $1 ]]; then
+    return 1
+  fi
+  return 0
+}
+
+function is_file() {
+  if [[ -n $1 ]] && [[ -f $1 ]]; then
+    return 1
+  fi
+  return 0
+}
+
+function get_file_extension() {
+  # For example, take filename example.tar.gz
+  # local filename="${FILE%%.*}"             # example
+  # local filename_with_sub_ext="${FILE%.*}" # example.tar
+  # local file_all_ext="${FILE#*.}"          # tar.gz
+  # local file_top_ext="${1##*.}" # gz
+  local filename=$(basename -- "$1")
+  echo "${filename##*.}"
+}
