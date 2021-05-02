@@ -199,13 +199,19 @@ function mkcd() {
 # here to ensure consistency across files.
 # ======================================================================================
 
+readonly sources=(
+  "$DOTFILES_DIR/zsh/oh_my_zsh"
+  "$DOTFILES_DIR/git/defaults"
+  "$DOTFILES_DIR/brew/defaults"
+  "$DOTFILES_DIR/node/defaults"
+  "$DOTFILES_DIR/workplace/wso2"
+)
+
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$"
 echo -e "ZSH VERSION: $ZSH_VERSION"
-. "$DOTFILES_DIR/zsh/oh_my_zsh"
-. "$DOTFILES_DIR/git/defaults"
-. "$DOTFILES_DIR/brew/defaults"
-. "$DOTFILES_DIR/workplace/wso2"
-# Now evaluate and add my aliases.
+for sourze in "${sources[@]}"; do
+  # shellcheck source=git/defaults
+  . "$sourze"
+done
 eval "$PERSONAL_ALIASES"
-unset PERSONAL_ALIASES
 echo -e "$USER's zsh environment is ready to 🥳.\n"
