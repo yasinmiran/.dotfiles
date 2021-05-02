@@ -50,13 +50,12 @@
     ~/Brewfile: brew/Brewfile
 
 - create:
-    - ~/development # This should be same as the one in zshrc
-    - ~/binaries    # This should be same as the one in zshrc
+    - ~/development # This must be same as the one in zshrc
+    - ~/binaries    # This must be same as the one in zshrc
     # - ~/.vim/undo-history
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - # Setup my zsh terminal.
-      command: ./zsh/setup_zsh
-    - # Bootstrap homebrew.
-      command: ./brew/setup_brew
+    - ./zsh/setup_zsh # Setups zsh and the environment.
+    - ./brew/setup_brew # Reinstate homebrew.
+    - ./node/setup_node # Setting up NodeJS and NPM.
