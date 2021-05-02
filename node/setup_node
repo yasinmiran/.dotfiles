@@ -27,8 +27,6 @@
 source "$DOTFILES_DIR/node/defaults"
 
 if exists npm; then
-  # Update NPM first.
-  npm install npm -g
   # Install global Node packages.
   echo "Installing your Node global packages."
   packages=(
