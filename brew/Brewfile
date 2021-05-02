@@ -1,3 +1,4 @@
+tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
@@ -9,12 +10,16 @@ brew "exa"
 brew "go"
 # Add GitHub support to git on the command-line
 brew "hub"
+# CLI wrapper for basic network utilities on macOS - ip command
+brew "iproute2mac"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Mac App Store command-line interface
 brew "mas"
 # Java-based project management
-brew "maven"
+brew "maven", link: false
+# Java-based project management
+brew "maven@3.2", link: true
 # Move, copy, append, and link multiple files
 brew "mmv"
 # Port scanning utility for large networks
@@ -31,6 +36,8 @@ brew "ssh-vault"
 brew "tree"
 # Additional completion definitions for zsh
 brew "zsh-completions"
+# Vault
+brew "hashicorp/tap/vault"
 # Prebuilt OpenJDK binaries
 cask "adoptopenjdk8"
 cask "git-credential-manager-core"
