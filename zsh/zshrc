@@ -131,12 +131,8 @@ function gupnod() {
 # FIXME: this function is still WIP
 function oms() {
 
-  if [[ $PWD == "$DEVELOPMENT_DIR" ]] || [[ $PWD == "$BINARIES_DIR" ]]; then
-    echo "Illegal operation. You cannot operate 'oms' on development or binaries directories!"
-    return 0
-  fi
-  if [[ $PWD == "$HOME" ]]; then
-    echo "Forbidden operation. You cannot operate 'oms' on home dir 😂."
+  if [[ $PWD != "$HOME/Desktop" ]] || [[ $PWD != "$HOME/Downloads" ]]; then
+    echo "Illegal operation 😂. You cannot operate 'oms' other than Desktop or Downloads directories."
     return 0
   fi
 
