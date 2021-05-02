@@ -115,3 +115,15 @@ function get_file_extension() {
   local filename=$(basename -- "$1")
   echo "${filename##*.}"
 }
+
+function linfo() {
+  echo ""
+}
+
+function lerror() {
+  echo ""
+}
+
+function lwarn() {
+  echo ""
+}

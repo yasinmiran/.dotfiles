@@ -2,19 +2,22 @@
   "entries": {
     "tap": {
       "homebrew/bundle": {
-        "revision": "ff52a209bfade1a663848684d354a6b623aaa4ca"
+        "revision": "30944b1a1ff672300855c4fcb4a5e660de149702"
       },
       "homebrew/cask": {
-        "revision": "20d5218dc63c26721a3dab5af9bec47173aac0c9"
+        "revision": "1664732d707d872655232e721f8e1863d2b4e010"
       },
       "homebrew/cask-versions": {
-        "revision": "5206a1d4de507d23268af308847df34624967c3a"
+        "revision": "785d9410c3d41de0eb41aaea2c9acee1bb3bf5c3"
       },
       "homebrew/core": {
-        "revision": "0e08c8db106261916201ca1412963c8b22b7c68a"
+        "revision": "389a0c5365a15fc6531cc9309afd1ab527c08030"
       },
       "microsoft/git": {
         "revision": "f4c204248e11500873ecab2f1be03ebb32923623"
+      },
+      "hashicorp/tap": {
+        "revision": "392e3e97fad433eb799fa3a748d439552b1b8843"
       }
     },
     "brew": {
@@ -175,7 +178,10 @@
       },
       "maven": {
         "version": "3.8.1",
-        "bottle": false
+        "bottle": false,
+        "options": {
+          "link": false
+        }
       },
       "mmv": {
         "version": "1.01b",
@@ -439,8 +445,36 @@
         }
       },
       "zsh-completions": {
-        "version": "0.32.0",
+        "version": "0.32.0_1",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "all": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/zsh-completions/blobs/sha256:8a580890a89c20941f937941151eed3b638bbbbf86a202332514445b9f25f7eb",
+              "sha256": "8a580890a89c20941f937941151eed3b638bbbbf86a202332514445b9f25f7eb"
+            }
+          }
+        }
+      },
+      "iproute2mac": {
+        "version": "1.3.0_1",
         "bottle": false
+      },
+      "maven@3.2": {
+        "version": "3.2.5_1",
+        "bottle": false,
+        "options": {
+          "link": true
+        }
+      },
+      "hashicorp/tap/vault": {
+        "version": "1.7.1",
+        "bottle": false,
+        "options": {
+          "link": false
+        }
       }
     },
     "cask": {
@@ -460,6 +494,54 @@
         "version": "0.9.10",
         "options": {
           "full_name": "keycastr"
+        }
+      },
+      "docker": {
+        "version": "3.3.1,63152",
+        "options": {
+          "full_name": "docker"
+        }
+      },
+      "google-chrome": {
+        "version": "90.0.4430.93",
+        "options": {
+          "full_name": "google-chrome"
+        }
+      },
+      "intellij-idea": {
+        "version": "2021.1.1,211.7142.45",
+        "options": {
+          "full_name": "intellij-idea"
+        }
+      },
+      "postman": {
+        "version": "8.3.0",
+        "options": {
+          "full_name": "postman"
+        }
+      },
+      "sketch": {
+        "version": "71.2,115329",
+        "options": {
+          "full_name": "sketch"
+        }
+      },
+      "slack": {
+        "version": "4.15.0",
+        "options": {
+          "full_name": "slack"
+        }
+      },
+      "visual-studio-code": {
+        "version": "1.55.2",
+        "options": {
+          "full_name": "visual-studio-code"
+        }
+      },
+      "zoom": {
+        "version": "5.6.4.765",
+        "options": {
+          "full_name": "zoom"
         }
       }
     },
@@ -481,12 +563,12 @@
   "system": {
     "macos": {
       "big_sur": {
-        "HOMEBREW_VERSION": "3.1.3",
+        "HOMEBREW_VERSION": "3.1.5",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "0e08c8db106261916201ca1412963c8b22b7c68a",
-        "CLT": "12.4.0.0.1.1610135815",
+        "Homebrew/homebrew-core": "389a0c5365a15fc6531cc9309afd1ab527c08030",
+        "CLT": "12.5.0.0.1.1617976050",
         "Xcode": "12.0",
-        "macOS": "11.1"
+        "macOS": "11.3"
       }
     }
   }

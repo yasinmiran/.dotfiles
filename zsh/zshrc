@@ -53,6 +53,11 @@ export DOTFILES_DIR="$HOME/.dotfiles"
 
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 
+# Fixes `insecure completion-dependent directories detected` error warning.
+# https://github.com/ohmyzsh/ohmyzsh/issues/6835
+# https://stackoverflow.com/a/61433333
+export ZSH_DISABLE_COMPFIX="true"
+
 export TOMCAT_HOME="/Users/yasin/Desktop/apache-tomcat-9.0.43"
 export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
 export PATH="$PATH:/Users/yasin/binaries/flutter/bin"
