@@ -39,7 +39,8 @@
 # unless the dependency does not have a description.
 function brubf() {
   echo "Dumping changes to Brewfile..." &&
-    brew bundle dump -v --force --describe
+    brew bundle dump -v --force --describe &&
+    echo "Updated $HOMEBREW_BUNDLE_FILE."
 }
 
 # Install all the dependencies using the available `Brewfile`.
@@ -49,11 +50,11 @@ function brba() {
     brew bundle --verbose
 }
 
-# Install the given formulae and call update_brewfile to add
+# Install the given formulae and call brubf to add
 # the newly installed to `Brewfile`.
 function briu() {
   brew install "$1" || exit &&
-    update_brewfile
+    brubf
 }
 
 # ======================================================================================
