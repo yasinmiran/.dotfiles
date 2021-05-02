@@ -61,19 +61,20 @@ export PATH="$PATH:/Users/yasin/binaries/flutter/bin"
 # Aliases
 # ======================================================================================
 
-alias ..="cd .."                 # go back one directory
-alias ...="cd ../.."             # go back two directories
-alias ....="cd ../../.."         # go back four directories
-alias .....="cd ../../../.."     # go back five directories
-alias ......="cd ../../../../.." # go back six directories
-alias ~="cd ~"                   # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                # go to old directory == cd $OLDPWD
+alias ..="cd .."                         # go back one directory
+alias ...="cd ../.."                     # go back two directories
+alias ....="cd ../../.."                 # go back four directories
+alias .....="cd ../../../.."             # go back five directories
+alias ......="cd ../../../../.."         # go back six directories
+alias ~="cd ~"                           # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                        # go to old directory == cd $OLDPWD
 
-alias d="cd ~/Documents"        # go to documents
-alias dl="cd ~/Downloads"       # go to downloads
-alias dt="cd ~/Desktop"         # go to desktop
-alias dev='cd $DEVELOPMENT_DIR' # go to dev working directory
-alias bins='cd $BINARIES_DIR'   # go to binaries directory
+alias d="cd ~/Documents"                 # go to documents
+alias dl="cd ~/Downloads"                # go to downloads
+alias dt="cd ~/Desktop"                  # go to desktop
+alias dev='cd $DEVELOPMENT_DIR'          # go to dev working directory
+alias bins='cd $BINARIES_DIR'            # go to binaries directory
+alias gtdfd='cd "$DOTFILES_DIR" || exit' # Go to dotfiles directory
 
 alias ls="exa -laFh --git"  # Descriptive ls
 alias exa="exa -laFh --git" # Alias for default exa
@@ -186,15 +187,8 @@ function atop() {
 # This function will create the given directory and
 # cd into it immediately.
 function mkcd() {
-  mkdir -p "$1" && cd "$1" || exit
-}
-
-# Abbreviated for: Go to dotfiles directory
-# This function will navigate to the dotfiles directory
-# from any directory. Instead of having to issue cd and
-# the path just calling this is easier.
-function gtdfd() {
-  cd "$DOTFILES_DIR" || exit
+  echo "Creating directory $1 and navigating you into it." &&
+    mkdir -p "$1" && cd "$1" || exit
 }
 
 # ======================================================================================
