@@ -32,6 +32,8 @@ brew "rename"
 brew "rpl"
 # Encrypt/decrypt using SSH keys
 brew "ssh-vault"
+# Implementation of Java Servlet and JavaServer Pages
+brew "tomcat@9", link: true
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Additional completion definitions for zsh

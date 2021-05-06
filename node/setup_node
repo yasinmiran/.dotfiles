@@ -35,6 +35,7 @@ if exists npm; then
     nodemon
     @angular/cli
     gatsby-cli
+    ttab
   )
   for package in "${packages[@]}"; do
     npm install --global "$package"
