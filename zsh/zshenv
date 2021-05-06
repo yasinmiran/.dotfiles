@@ -58,9 +58,7 @@ function exists() {
 # A function that ask a question and waits for a
 # YES or NO answer from the stdin.
 function ask() {
-
   local prompt default reply
-
   if [[ ${2:-} == 'Y' ]]; then
     prompt='Y/n'
     default='Y'
@@ -71,7 +69,6 @@ function ask() {
     prompt='y/n'
     default=''
   fi
-
   while true; do
     # Ask the question (not using "read -p" as
     # it uses stderr not stdout)
@@ -89,7 +86,6 @@ function ask() {
     N* | n*) return 1 ;;
     esac
   done
-
 }
 
 function is_directory() {
@@ -107,6 +103,7 @@ function is_file() {
 }
 
 function get_file_extension() {
+  # TODO re implement this
   # For example, take filename example.tar.gz
   # local filename="${FILE%%.*}"             # example
   # local filename_with_sub_ext="${FILE%.*}" # example.tar
@@ -116,14 +113,8 @@ function get_file_extension() {
   echo "${filename##*.}"
 }
 
-function linfo() {
-  echo ""
-}
-
-function lerror() {
-  echo ""
-}
-
-function lwarn() {
-  echo ""
+# Find and replace all the strings matching target
+# in a specified file.
+function frepl() {
+  sed -i.bak "s/$1/$2/g" "$3"
 }

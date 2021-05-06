@@ -58,28 +58,27 @@ export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
-export TOMCAT_HOME="/Users/yasin/Desktop/apache-tomcat-9.0.43"
+export TOMCAT_HOME="/usr/local/Cellar/tomcat@9/9.0.45/libexec"
 export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
-export PATH="$PATH:/Users/yasin/binaries/flutter/bin"
 
 # ======================================================================================
 # Aliases
 # ======================================================================================
 
-alias ..="cd .."                         # go back one directory
-alias ...="cd ../.."                     # go back two directories
-alias ....="cd ../../.."                 # go back four directories
-alias .....="cd ../../../.."             # go back five directories
-alias ......="cd ../../../../.."         # go back six directories
-alias ~="cd ~"                           # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                        # go to old directory == cd $OLDPWD
+alias ..="cd .."                    # go back one directory
+alias ...="cd ../.."                # go back two directories
+alias ....="cd ../../.."            # go back four directories
+alias .....="cd ../../../.."        # go back five directories
+alias ......="cd ../../../../.."    # go back six directories
+alias ~="cd ~"                      # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                   # go to old directory == cd $OLDPWD
 
-alias d="cd ~/Documents"                 # go to documents
-alias dl="cd ~/Downloads"                # go to downloads
-alias dt="cd ~/Desktop"                  # go to desktop
-alias dev='cd $DEVELOPMENT_DIR'          # go to dev working directory
-alias bins='cd $BINARIES_DIR'            # go to binaries directory
-alias gtdfd='cd "$DOTFILES_DIR" || exit' # Go to dotfiles directory
+alias d="cd ~/Documents"            # go to documents
+alias dl="cd ~/Downloads"           # go to downloads
+alias dt="cd ~/Desktop"             # go to desktop
+alias dev='cd $DEVELOPMENT_DIR'     # go to dev working directory
+alias bins='cd $BINARIES_DIR'       # go to binaries directory
+alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
 
 alias ls="exa -laFh --git"  # Descriptive ls
 alias exa="exa -laFh --git" # Alias for default exa
@@ -214,5 +213,6 @@ for sourze in "${sources[@]}"; do
   # shellcheck source=git/defaults
   . "$sourze"
 done
+# Override the personal aliases on top of all the sourced files.
 eval "$PERSONAL_ALIASES"
 echo -e "$USER's zsh environment is ready to 🥳.\n"

@@ -31,6 +31,7 @@
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git
 
 alias gstash="git stash"             # default stash.
+alias gstashall="git stash -u"       # Stash all untracked ones.
 alias gp="git push"                  # default push.
 alias gpristinesoft="git clean -dff" # Clears all untracked files.
 alias gundo="git reset HEAD~1"       # Undo last commit.
@@ -45,13 +46,17 @@ alias gundo="git reset HEAD~1"       # Undo last commit.
 # sync the origin main branch with the upstream main.
 # @arg $1 main/master default is "master"
 function suwm() {
-  local ref && ref=${1:-"master"}
+  local ref=${1:-"master"}
+  local with_upstream=${2:-true}
   gst &&
-    gstash &&
+    gstashall &&
     gpristinesoft &&
     gco "$ref" &&
-    gf "upstream" &&
-    grb "upstream/$ref" &&
+    if [[ "$with_upstream" == true ]]; then
+      gf "upstream" && grb "upstream/$ref"
+    else
+      gf "origin" && gl "origin" "$ref"
+    fi &&
     gp "origin" "$ref"
 }
 
