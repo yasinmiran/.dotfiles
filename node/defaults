@@ -26,11 +26,6 @@
 # Aliases
 # ======================================================================================
 
-alias npmg="npm list -g --depth 0"
-alias nppr="npm run"
-
-# ======================================================================================
-# Default Command Executions
-# ======================================================================================
-
-echo "NodeJS/NPM defaults ✅"
+alias npmg="npm list -g --depth 0" # List all global packages
+alias nppr="npm run"               # run quick
+alias npprs="npm run start"        # npm run start quick

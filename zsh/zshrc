@@ -85,9 +85,9 @@ alias exa="exa -laFh --git" # Alias for default exa
 alias cls="clear"           # Good old cls
 alias rrr="exec zsh"        # Relaunch zsh
 
-# Since we use oh-my-zsh there will lots of aliases loaded
-# to the env. However, I want some commands the way I want
-# so I'm overriding the similar existing ones with mine.
+# Since we use oh-my-zsh there will lots of aliases loaded to the env. However,
+# I want some commands the way I want so I'm overriding the similar existing
+# ones with mine. First push all the above aliases and then pop back later.
 PERSONAL_ALIASES=$(alias -L)
 
 # ======================================================================================
@@ -95,8 +95,8 @@ PERSONAL_ALIASES=$(alias -L)
 # ======================================================================================
 
 # Abbreviated for: Go up by N number of directories.
-# This function can go up *n number of directories
-# upwards. If you are in a nested folder just executing
+#
+# This function can go up *n number of directories upwards. If you are in a nested folder just executing
 # `$ gupnod 10` will move you up 10 directories.
 function gupnod() {
 
@@ -127,9 +127,8 @@ function gupnod() {
 
 # Abbreviated: Organize my shit
 #
-# This function can organize the files based on their type. It is very
-# much similar to macOS stacks however, it will create directories with
-# the extension name instead of their category type.
+# This function can organize the files based on their type. It is very much similar to macOS
+# stacks however, it will create directories with the extension name instead of their category type.
 #
 # This function can operate without conflicting the existing folders.
 # FIXME: this function is still WIP
@@ -172,8 +171,7 @@ function oms() {
 }
 
 # Abbreviated for: Append to $PATH
-# This function will append a path to $PATH
-# and source the self itself.
+# This function will append a path to $PATH and source the self itself.
 function atop() {
   local path && path=${1}
   if [[ -n "$path" ]] && [[ -d "$path" ]]; then
@@ -184,8 +182,7 @@ function atop() {
 }
 
 # Abbreviated for: Make directory and Change directory.
-# This function will create the given directory and
-# cd into it immediately.
+# This function will create the given directory and cd into it immediately.
 function mkcd() {
   echo "Creating directory $1 and navigating you into it." &&
     mkdir -p "$1" && cd "$1" || exit
@@ -207,12 +204,10 @@ readonly sources=(
   "$DOTFILES_DIR/workplace/wso2"
 )
 
-echo -e "\nA new $(ps -o comm= $$) session created with pid $$"
-echo -e "ZSH VERSION: $ZSH_VERSION"
+echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
 for sourze in "${sources[@]}"; do
   # shellcheck source=git/defaults
   . "$sourze"
 done
-# Override the personal aliases on top of all the sourced files.
 eval "$PERSONAL_ALIASES"
-echo -e "$USER's zsh environment is ready to 🥳.\n"
+echo -e "$USER's zsh environment is ready.\n"

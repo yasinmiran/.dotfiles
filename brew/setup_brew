@@ -43,5 +43,5 @@ fi
 # By default when after a successful brew installation we will bundle the
 # packages using the Brewfile.
 
-brba && # Re-instate the packages, casks, and mas.
-  brubf # Update the Brewfile once again.
+brew_bundle && # Re-instate the packages, casks, and mas.
+  brew_dump # Update the Brewfile once again.

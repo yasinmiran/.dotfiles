@@ -37,7 +37,7 @@
 #
 # @arg --describe dump adds a description comment above each line,
 # unless the dependency does not have a description.
-function brubf() {
+function brew_dump() {
   echo "Dumping changes to Brewfile..." &&
     brew bundle dump -v --force --describe &&
     echo "Updated $HOMEBREW_BUNDLE_FILE."
@@ -45,16 +45,16 @@ function brubf() {
 
 # Install all the dependencies using the available `Brewfile`.
 # First it will tap necessary repos and install packages then casks.
-function brba() {
+function brew_bundle() {
   echo -e "Bundling your brew via Brewfile" &&
     brew bundle --verbose
 }
 
 # Install the given formulae and call brubf to add
 # the newly installed to `Brewfile`.
-function briu() {
+function brew_install() {
   brew install "$1" || exit &&
-    brubf
+    brew_dump
 }
 
 # ======================================================================================
@@ -67,9 +67,3 @@ function briu() {
 export HOMEBREW_CASK_OPTS="--no-quarantine --no-binaries"
 export DOTFILES_BREW_DIR="$DOTFILES_DIR/brew"
 export HOMEBREW_BUNDLE_FILE="$DOTFILES_BREW_DIR/Brewfile"
-
-# ======================================================================================
-# Default Command Executions
-# ======================================================================================
-
-echo "Loaded homebrew defaults ✅"

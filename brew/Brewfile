@@ -51,6 +51,9 @@ cask "google-chrome"
 cask "intellij-idea"
 # Open-source keystroke visualizer
 cask "keycastr"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+cask "microsoft-word"
 # Collaboration platform for API development
 cask "postman"
 # Digital design and prototyping platform
