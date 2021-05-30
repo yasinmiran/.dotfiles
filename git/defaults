@@ -40,22 +40,42 @@ alias gundo="git reset HEAD~1"       # Undo last commit.
 # Functions
 # ======================================================================================
 
-# suwm: Sync Up With Main/Master
+# Abbreviation suwm: Sync Up with Main/Master
 #
 # Sync up with main branch. This function is a quick way to
 # sync the origin main branch with the upstream main.
+#
 # @arg $1 main/master default is "master"
 function suwm() {
-  local ref=${1:-"master"}
-  local with_upstream=${2:-true}
-  gst &&
-    gstashall &&
-    gpristinesoft &&
-    gco "$ref" &&
-    if [[ "$with_upstream" == true ]]; then
-      gf "upstream" && grb "upstream/$ref"
-    else
-      gf "origin" && gl "origin" "$ref"
-    fi &&
-    gp "origin" "$ref"
+  if ask "Proceed?" Y; then
+    local ref=${1:-"master"}
+    local with_upstream=${2:-true}
+    gst &&
+      gstashall &&
+      if ask "Do you want to clean binaries as well?" N; then
+        # Loaded via zsh git helpers. It will clean all the
+        # installed binaries. i.e., node_modules, dist
+        gpristine
+      else
+        gpristinesoft
+      fi &&
+      gco "$ref" &&
+      if [[ "$with_upstream" == true ]]; then
+        gf "upstream" &&
+          grb "upstream/$ref" &&
+          gp "origin" "$ref"
+      else
+        gf "origin" &&
+          gl "origin" "$ref"
+      fi
+  fi
+}
+
+# Patch another branch when working on a specific branch.
+# This function is little bit ambiguous. Need to check this
+# later. FIXME - re-evaluate this
+#
+function patch() {
+  # local remote=${1:"origin"}
+  # git pull "$remote" <srcBranch>:<destBranch>
 }

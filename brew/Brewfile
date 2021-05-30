@@ -3,9 +3,14 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "homebrew/services"
 tap "microsoft/git"
+# Display user-friendly message boxes from shell scripts
+brew "dialog"
 # Modern replacement for 'ls'
 brew "exa"
+# Distributed revision control system
+brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Add GitHub support to git on the command-line
@@ -22,10 +27,14 @@ brew "maven", link: false
 brew "maven@3.2", link: true
 # Move, copy, append, and link multiple files
 brew "mmv"
+# HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
+brew "nginx"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
-brew "node@12", link: true
+brew "node@12"
+# Platform built on V8 to build network applications
+brew "node@14", link: true
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Text replacement utility
@@ -33,15 +42,21 @@ brew "rpl"
 # Encrypt/decrypt using SSH keys
 brew "ssh-vault"
 # Implementation of Java Servlet and JavaServer Pages
-brew "tomcat@9", link: true
+brew "tomcat@9", restart_service: true, link: true
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Download YouTube videos from the command-line
+brew "youtube-dl"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
 # Additional completion definitions for zsh
 brew "zsh-completions"
 # Vault
 brew "hashicorp/tap/vault", link: false
 # Prebuilt OpenJDK binaries
 cask "adoptopenjdk8"
+# Free app that makes your Internet safer
+cask "cloudflare-warp"
 # App to build and share containerized applications and microservices
 cask "docker"
 cask "git-credential-manager-core"
@@ -53,16 +68,23 @@ cask "intellij-idea"
 cask "keycastr"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
+# Word processor
 cask "microsoft-word"
 # Collaboration platform for API development
 cask "postman"
+# VPN client focusing on security
+cask "protonvpn"
 # Digital design and prototyping platform
 cask "sketch"
 # Team communication and collaboration software
 cask "slack"
+# Web browser focusing on security
+cask "tor-browser"
 # Open-source code editor
 cask "visual-studio-code"
 # Video communication and virtual meeting platform
 cask "zoom"
+# Collect, organize, cite, and share research sources
+cask "zotero"
 mas "Bitwarden", id: 1352778147
 mas "Gifski", id: 1351639930

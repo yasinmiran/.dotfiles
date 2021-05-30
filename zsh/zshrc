@@ -135,7 +135,7 @@ function gupnod() {
 function oms() {
 
   if [[ $PWD != "$HOME/Desktop" ]] || [[ $PWD != "$HOME/Downloads" ]]; then
-    echo "Illegal operation 😂. You cannot operate 'oms' other than Desktop or Downloads directories."
+    echo "That's a funny move 😂."
     return 0
   fi
 
@@ -188,6 +188,19 @@ function mkcd() {
     mkdir -p "$1" && cd "$1" || exit
 }
 
+# Find all matching aliases using alias-finder plugin.
+function alf() {
+  echo "Searching for aliases..." &&
+    alias-finder -l "$1"
+}
+
+# This function is used to synchronize local dotfiles to
+# this repository files.
+function synchronize() {
+  echo "Syncing to $DOTFILES_DIR" &&
+    brew_dump
+}
+
 # ======================================================================================
 # Default Command Executions
 #
@@ -201,6 +214,7 @@ readonly sources=(
   "$DOTFILES_DIR/git/defaults"
   "$DOTFILES_DIR/brew/defaults"
   "$DOTFILES_DIR/node/defaults"
+  "$DOTFILES_DIR/docker/defaults"
   "$DOTFILES_DIR/workplace/wso2"
 )
 

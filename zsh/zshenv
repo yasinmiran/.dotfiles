@@ -118,3 +118,10 @@ function get_file_extension() {
 function frepl() {
   sed -i.bak "s/$1/$2/g" "$3"
 }
+
+# Change the file type to a executable.
+# Argument 1 will be the relative path of the file.
+function make_executable() {
+  local target_file=$1
+  chmod +x ./$target_file
+}
