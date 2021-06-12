@@ -123,5 +123,5 @@ function frepl() {
 # Argument 1 will be the relative path of the file.
 function make_executable() {
   local target_file=$1
-  chmod +x ./$target_file
+  chmod +x ."/$target_file"
 }

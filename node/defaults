@@ -29,3 +29,19 @@
 alias npmg="npm list -g --depth 0" # List all global packages
 alias npmr="npm run"               # run quick
 alias npmrs="npm run start"        # npm run start quick
+
+alias next_dev="npm run dev:watch" # NextJS portfolio dev
+
+# ======================================================================================
+# Functions
+# ======================================================================================
+
+# This is a project specific function that I use mainly for
+# cleaning up and starting a fresh instance.
+#
+function clean_up_portfolio_project_bins() {
+  rm -rf node_modules package-lock.json .next &&
+    npm install &&
+    npm run build &&
+    npm run dev:watch
+}
