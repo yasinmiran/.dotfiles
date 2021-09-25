@@ -50,8 +50,9 @@
     ~/Brewfile: brew/Brewfile
 
 - create:
-    - ~/development # This must be same as the one in zshrc
-    - ~/binaries    # This must be same as the one in zshrc
+    - ~/development # Projects folder
+    - ~/binaries    # Binaries folder
+    - ~/.secrets    # Secrets file
     # - ~/.vim/undo-history
 
 - shell:

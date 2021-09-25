@@ -9,12 +9,16 @@ tap "microsoft/git"
 brew "dialog"
 # Modern replacement for 'ls'
 brew "exa"
+# Read, write, modify, and display EXIF data on the command-line
+brew "exif"
 # Distributed revision control system
 brew "git"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Add GitHub support to git on the command-line
 brew "hub"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.9"
 # CLI wrapper for basic network utilities on macOS - ip command
 brew "iproute2mac"
 # Lightweight and flexible command-line JSON processor
@@ -27,14 +31,20 @@ brew "maven", link: false
 brew "maven@3.2", link: true
 # Move, copy, append, and link multiple files
 brew "mmv"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
 brew "nginx"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
+brew "node"
+# Platform built on V8 to build network applications
 brew "node@12"
 # Platform built on V8 to build network applications
 brew "node@14", link: true
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.8"
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Text replacement utility
@@ -59,7 +69,11 @@ cask "adoptopenjdk8"
 cask "cloudflare-warp"
 # App to build and share containerized applications and microservices
 cask "docker"
+# Web browser
+cask "firefox"
 cask "git-credential-manager-core"
+# Git client focusing on productivity
+cask "gitkraken"
 # Web browser
 cask "google-chrome"
 # Java IDE by JetBrains
@@ -68,6 +82,8 @@ cask "intellij-idea"
 cask "keycastr"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
+# Meet, chat, call, and collaborate in just one place
+cask "microsoft-teams"
 # Word processor
 cask "microsoft-word"
 # Collaboration platform for API development
@@ -82,6 +98,8 @@ cask "slack"
 cask "tor-browser"
 # Open-source code editor
 cask "visual-studio-code"
+# Multimedia player
+cask "vlc"
 # Video communication and virtual meeting platform
 cask "zoom"
 # Collect, organize, cite, and share research sources

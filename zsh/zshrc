@@ -50,7 +50,6 @@
 export DEVELOPMENT_DIR="$HOME/development"
 export BINARIES_DIR="$HOME/binaries"
 export DOTFILES_DIR="$HOME/.dotfiles"
-
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 
 # Fixes `insecure completion-dependent directories detected` error warning.
@@ -58,8 +57,14 @@ export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
+export PATH="$PATH"
 export TOMCAT_HOME="/usr/local/Cellar/tomcat@9/9.0.45/libexec"
 export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
+
+# Big Data & Analytics: MOD
+# export SPARK_HOME="/Users/yasin/binaries/spark-3.1.2-bin-hadoop3.2"
+# export PYSPARK_PYTHON="python3"
+# export KAFKA_HOME="/Users/yasin/binaries/kafka_2.12-2.8.0"
 
 # ======================================================================================
 # Aliases
@@ -79,6 +84,10 @@ alias dt="cd ~/Desktop"             # go to desktop
 alias dev='cd $DEVELOPMENT_DIR'     # go to dev working directory
 alias bins='cd $BINARIES_DIR'       # go to binaries directory
 alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
+
+# For Big data and Analytics module quick demo
+alias bbb="cd /Users/yasin/development/big-data-gcw"
+alias bb="cd /Users/yasin/development/big-data-gcw && source venv/bin/activate && source scripts/activate.zsh"
 
 alias ls="exa -laFh --git"  # Descriptive ls
 alias exa="exa -laFh --git" # Alias for default exa
@@ -173,9 +182,9 @@ function oms() {
 # Abbreviated for: Append to $PATH
 # This function will append a path to $PATH and source the self itself.
 function atop() {
-  local path && path=${1}
-  if [[ -n "$path" ]] && [[ -d "$path" ]]; then
-    export PATH="$PATH:$path"
+  local new_path && new_path=${1}
+  if [[ -n "$new_path" ]] && [[ -d "$new_path" ]]; then
+    PATH="$PATH:$new_path"
   else
     echo "Nothing done. Path is invalid!"
   fi
@@ -217,6 +226,11 @@ readonly sources=(
   "$DOTFILES_DIR/docker/defaults"
   "$DOTFILES_DIR/workplace/wso2"
 )
+
+# Append binary paths to $PATH.
+atop "$SPARK_HOME/bin"
+atop "$KAFKA_HOME/bin"
+atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode shortcut
 
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
 for sourze in "${sources[@]}"; do

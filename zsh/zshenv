@@ -103,7 +103,7 @@ function is_file() {
 }
 
 function get_file_extension() {
-  # TODO re implement this
+  # TODO: Revisit this and implement again.
   # For example, take filename example.tar.gz
   # local filename="${FILE%%.*}"             # example
   # local filename_with_sub_ext="${FILE%.*}" # example.tar

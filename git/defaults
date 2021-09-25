@@ -47,7 +47,15 @@ alias gundo="git reset HEAD~1"       # Undo last commit.
 #
 # @arg $1 main/master default is "master"
 function suwm() {
-  if ask "Proceed?" Y; then
+
+  cat <<EOS
+
+Here are the remotes you've added: -
+$(git remote -v)
+
+EOS
+
+  if ask "Do you want to proceed?" Y; then
     local ref=${1:-"master"}
     local with_upstream=${2:-true}
     gst &&
@@ -63,19 +71,24 @@ function suwm() {
       if [[ "$with_upstream" == true ]]; then
         gf "upstream" &&
           grb "upstream/$ref" &&
+          echo "You have 5 seconds to cancel push 'origin'" &&
+          sleep 5 &&
           gp "origin" "$ref"
       else
         gf "origin" &&
+          echo "You have 5 seconds to cancel push 'origin'" &&
           gl "origin" "$ref"
       fi
   fi
+
 }
 
 # Patch another branch when working on a specific branch.
 # This function is little bit ambiguous. Need to check this
-# later. FIXME - re-evaluate this
+# later.
 #
 function patch() {
+  # TODO: Implement
   # local remote=${1:"origin"}
   # git pull "$remote" <srcBranch>:<destBranch>
 }

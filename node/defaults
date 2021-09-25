@@ -31,6 +31,7 @@ alias npmr="npm run"               # run quick
 alias npmrs="npm run start"        # npm run start quick
 
 alias next_dev="npm run dev:watch" # NextJS portfolio dev
+alias cdp="refresh_deps"
 
 # ======================================================================================
 # Functions
@@ -38,10 +39,16 @@ alias next_dev="npm run dev:watch" # NextJS portfolio dev
 
 # This is a project specific function that I use mainly for
 # cleaning up and starting a fresh instance.
-#
 function clean_up_portfolio_project_bins() {
   rm -rf node_modules package-lock.json .next &&
     npm install &&
     npm run build &&
     npm run dev:watch
+}
+
+# Delete all the bins and re install the packages.
+# Only applies to my portfolio.
+function refresh_deps() {
+  rm -rf node_modules package-lock.json .next &&
+    npm install
 }
