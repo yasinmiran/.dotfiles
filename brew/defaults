@@ -43,6 +43,12 @@ function brew_dump() {
     echo "Updated $HOMEBREW_BUNDLE_FILE."
 }
 
+# Clean my shit.
+function brew_clean() {
+  echo "Cleaning symbolic links..." &&
+    brew cleanup
+}
+
 # Install all the dependencies using the available `Brewfile`.
 # First it will tap necessary repos and install packages then casks.
 function brew_bundle() {

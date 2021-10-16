@@ -22,8 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# First of all make homebrew my default shell.
-chsh -s "$(which zsh)"
+# First of all make zsh my default shell.
+if [ "/bin/zsh" != "$(which zsh)" ]; then
+  chsh -s "$(which zsh)"
+else
+  echo "Hey $USER, zsh is your default shell :) doing my happy dance..."
+fi
 
 # Prompt user to install the XCode Command Line Tools
 if ! xcode-select --print-path &>/dev/null; then
@@ -56,4 +60,9 @@ else
   readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
   unset url
+fi
+
+# Clone auto suggestions for omz.
+if [ -d "$ZSH_CUSTOM" ] && [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi

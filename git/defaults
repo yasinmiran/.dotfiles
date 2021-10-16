@@ -82,13 +82,3 @@ EOS
   fi
 
 }
-
-# Patch another branch when working on a specific branch.
-# This function is little bit ambiguous. Need to check this
-# later.
-#
-function patch() {
-  # TODO: Implement
-  # local remote=${1:"origin"}
-  # git pull "$remote" <srcBranch>:<destBranch>
-}

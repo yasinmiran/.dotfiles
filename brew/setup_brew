@@ -35,13 +35,13 @@ source "$DOTFILES_DIR/brew/defaults"
 # the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
 if exists brew; then
-  echo "Nothing done. Homebrew is already installed."
+  echo "Hey $USER, homebrew is already installed :)"
 else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # By default when after a successful brew installation we will bundle the
 # packages using the Brewfile.
-
 brew_bundle && # Re-instate the packages, casks, and mas.
+  brew_clean &&
   brew_dump # Update the Brewfile once again.

@@ -41,9 +41,6 @@
 - clean: [ '~' ]
 
 - link:
-    # ~/.tmux.conf: tmux.conf
-    # ~/.vim: vim
-    # ~/.vimrc: vimrc
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
     ~/.gitconfig: git/gitconfig
@@ -53,7 +50,6 @@
     - ~/development # Projects folder
     - ~/binaries    # Binaries folder
     - ~/.secrets    # Secrets file
-    # - ~/.vim/undo-history
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
