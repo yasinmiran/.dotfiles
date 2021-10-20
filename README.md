@@ -1,7 +1,7 @@
 # Yasin's `.dotfiles`
 
-These are my `dotfiles`!. You should first go through the files and tweak them to your needs if want to do so. Below is
-a small explanation on how do I structure these dotfiles.
+You should first go through the files and tweak them to your needs if want to do so. Below is a small explanation on how
+do I structure these dotfiles.
 
 But before that I must say **thanks** to [eieioxyz](https://github.com/eieioxyz). His
 amazing [course](https://www.udemy.com/course/dotfiles-from-start-to-finish-ish/) on Udemy about dotfiles helped me to
