@@ -1,27 +1,5 @@
 #!/usr/bin/env zsh
 
-# MIT License
-#
-# Copyright (c) 2021 Yasin Miran
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 # ======================================================================================
 # Exports
 # ======================================================================================
@@ -127,51 +105,6 @@ function gupnod() {
 
 }
 
-# Abbreviated: Organize my shit
-#
-# This function can organize the files based on their type. It is very much similar to macOS
-# stacks however, it will create directories with the extension name instead of their category type.
-#
-# This function can operate without conflicting the existing folders.
-# FIXME: this function is still WIP
-function oms() {
-
-  if [[ $PWD != "$HOME/Desktop" ]] || [[ $PWD != "$HOME/Downloads" ]]; then
-    echo "That's a funny move 😂."
-    return 0
-  fi
-
-  local cdir=$PWD
-
-  for i in "$cdir"/*; do
-
-    # if its a directory then we won't recurse instead,
-    # we will put it into a dir called `stacks_dirs`.
-    if is_directory "$i"; then
-      mkdir -p "$cdir/stacks_dirs"
-      echo "Moving $i to $cdir/stacks_dirs"
-      continue
-      # mv "$i" "$cdir/stacks_dirs/"
-    fi
-
-    if is_file "$i"; then
-      ext=$(get_file_extension "$i")
-      echo "File extension is $ext"
-      if [[ -n "$ext" ]] && [ "$ext" != "." ]; then
-        mkdir -p "$cdir/$ext"
-        echo "Moving $i to $cdir/$ext/"
-        # mv "$i" "$cdir/$ext/"
-      else
-        mkdir -p "$cdir/stacks_no_ext"
-        echo "Moving $i to $cdir/stacks_no_ext/"
-        # mv "$i" "$cdir/stacks_no_ext/"
-      fi
-    fi
-
-  done
-
-}
-
 # Abbreviated for: Append to $PATH
 # This function will append a path to $PATH and source the self itself.
 function atop() {
@@ -198,6 +131,7 @@ function alf() {
 
 # This function is used to synchronize local dotfiles to
 # this repository files.
+# I have only sync brew related things for now.
 function synchronize() {
   echo "Syncing to $DOTFILES_DIR" &&
     brew_dump

@@ -53,7 +53,11 @@ cask "microsoft-word"
 cask "postman"
 # Team communication and collaboration software
 cask "slack"
+# Music streaming service
+cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
+# JavaScript IDE
+cask "webstorm"
 mas "Bitwarden", id: 1352778147
 mas "Gifski", id: 1351639930
