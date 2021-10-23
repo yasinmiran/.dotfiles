@@ -151,6 +151,7 @@ readonly sources=(
   "$DOTFILES_DIR/brew/defaults"
   "$DOTFILES_DIR/node/defaults"
   "$DOTFILES_DIR/docker/defaults"
+  "$DOTFILES_DIR/macos/defaults"
   # "$DOTFILES_DIR/workplace/wso2"
 )
 

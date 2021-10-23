@@ -1,3 +1,9 @@
 #!/usr/bin/env zsh
 
-# Work in progress
+alias stfu='osascript -e "set volume output volume 0"'
+alias vv='osascript -e "set volume output volume 50"'
+alias vvv='osascript -e "set volume output volume 80"'
+alias vvvv='osascript -e "set volume output volume 100"'
+
+alias mute='osascript -e "set volume input volume 0"'
+alias unmute='osascript -e "set volume input volume 100"'
