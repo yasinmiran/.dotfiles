@@ -8,6 +8,9 @@
 # I will be using their git plugin. So, check the cheatsheet.
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git
 
+alias gut="git"
+alias got="git"
+
 alias gstash="git stash"             # default stash.
 alias gstashall="git stash -u"       # Stash all untracked ones.
 alias gp="git push"                  # default push.
