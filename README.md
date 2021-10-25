@@ -40,7 +40,7 @@ $ ./install
 
 After executing above command, dotfiles will get linked and all the sub `setup_*` scripts will execute in order. To pick
 up the changes you must quit the current terminal process and all the functions will be preloaded to your zsh
-environment. Now you can re-run the installation command like below.
+environment.
 
 ## Many Kudos 🧙🏻‍♂️
 
