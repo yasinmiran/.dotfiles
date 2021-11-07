@@ -8,6 +8,8 @@
 # I will be using their git plugin. So, check the cheatsheet.
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#git
 
+alias fit="git"
+alias hit="git"
 alias gut="git"
 alias got="git"
 
