@@ -25,6 +25,7 @@
 # _ (underscore)  Previously executed command
 # $?              Previous command exit code 0...127
 
+export PATH="$PATH"
 export DEVELOPMENT_DIR="$HOME/development"
 export BINARIES_DIR="$HOME/binaries"
 export DOTFILES_DIR="$HOME/.dotfiles"
@@ -35,8 +36,7 @@ export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
-export PATH="$PATH"
-
+# If Java installed via brew, then pick it up from libs and export it's path.
 [ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
 
 # ======================================================================================
@@ -73,37 +73,6 @@ PERSONAL_ALIASES=$(alias -L)
 # ======================================================================================
 # Functions
 # ======================================================================================
-
-# Abbreviated for: Go up by N number of directories.
-#
-# This function can go up *n number of directories upwards. If you are in a nested folder just executing
-# `$ gupnod 10` will move you up 10 directories.
-function gupnod() {
-
-  # Reference of present working directory
-  local c_dir && c_dir="$(pwd)"
-
-  if [[ "${1}" == "" ]]; then
-    c_dir="$(dirname "${c_dir}")"
-  elif ! [[ "${1}" =~ ^[0-9]{1,2}$ ]]; then
-    echo "Error: argument must be a number"
-  elif ! [[ "${1}" -gt "0" ]]; then
-    echo "Error: argument must be positive"
-  else
-    # Go through each dirname
-    for ((i = 0; i < ${1}; i++)); do
-      local n_cdir && n_cdir="$(dirname "${c_dir}")"
-      if [[ "${c_dir}" == "${n_cdir}" ]]; then
-        break
-      else
-        c_dir="${n_cdir}"
-      fi
-    done
-  fi
-
-  cd "${c_dir}" || exit
-
-}
 
 # Abbreviated for: Append to $PATH
 # This function will append a path to $PATH and source the self itself.
