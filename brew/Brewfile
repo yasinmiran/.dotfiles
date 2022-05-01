@@ -39,8 +39,8 @@ brew "hashicorp/tap/vault", link: false
 cask "cloudflare-warp"
 # App to build and share containerized applications and microservices
 cask "docker"
-# Web browser
-cask "google-chrome"
+# Go (golang) IDE
+cask "goland"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Open-source keystroke visualizer
@@ -55,9 +55,3 @@ cask "postman"
 cask "slack"
 # Music streaming service
 cask "spotify"
-# Open-source code editor
-cask "visual-studio-code"
-# JavaScript IDE
-cask "webstorm"
-mas "Bitwarden", id: 1352778147
-mas "Gifski", id: 1351639930
