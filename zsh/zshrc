@@ -36,8 +36,13 @@ export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
-# If Java installed via brew, then pick it up from libs and export it's path.
+# if Java installed via brew, then pick it up from libs and export it's path.
 [ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
+
+# nvm related source loaders
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # ======================================================================================
 # Aliases
@@ -58,10 +63,7 @@ alias dev='cd $DEVELOPMENT_DIR'     # go to dev working directory
 alias bins='cd $BINARIES_DIR'       # go to binaries directory
 alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
 
-if exists "exa"; then
-   alias ls="exa -laFh --git"  # Descriptive ls
-fi
-alias exa="exa -laFh --git" # Alias for default exa
+alias ls="exa -laFh --git"  # Override default ls
 alias cls="clear"           # Good old cls
 alias rrr="exec zsh"        # Relaunch zsh
 
@@ -125,8 +127,9 @@ readonly sources=(
 )
 
 # Append binary paths to $PATH.
-atop "/opt/homebrew/bin"
-atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode shortcut
+atop "/opt/homebrew/bin" # Homebrew Binaries
+atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
+atop "$HOME/.rd/bin" # Rancher Desktop
 
 # New shell prompt message
 

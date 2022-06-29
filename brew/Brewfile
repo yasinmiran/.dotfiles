@@ -1,10 +1,19 @@
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "microsoft/git"
+# Development kit for the Java programming language
+brew "openjdk@11", link: true
+# Programming Language for Network Distributed Applications
+brew "ballerina"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Pack, ship and run any application as a lightweight container
+brew "docker"
 # Modern replacement for 'ls'
 brew "exa"
 # Distributed revision control system
@@ -15,14 +24,20 @@ brew "go"
 brew "jq"
 # Mac App Store command-line interface
 brew "mas"
+# Development kit for the Java programming language
+brew "openjdk"
+# Java-based project management
+brew "maven@3.2", link: true
+# Java-based project management
+brew "maven@3.5"
 # Move, copy, append, and link multiple files
 brew "mmv"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
-# Platform built on V8 to build network applications
-brew "node@14", link: true
+# Manage multiple Node.js versions
+brew "nvm"
 # Perl-powered file rename script with many helpful built-ins
 brew "rename"
 # Text replacement utility
@@ -35,12 +50,21 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 # Vault
 brew "hashicorp/tap/vault", link: false
+# Prebuilt OpenJDK binaries
+cask "adoptopenjdk8"
+# Tools for building Android applications
+cask "android-studio"
 # Free app that makes your Internet safer
 cask "cloudflare-warp"
-# App to build and share containerized applications and microservices
-cask "docker"
+# Voice and text chat software
+cask "discord"
+# Web browser
+cask "firefox"
+cask "font-hind"
 # Go (golang) IDE
 cask "goland"
+# Java IDE by JetBrains
+cask "intellij-idea"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
 # Open-source keystroke visualizer
@@ -51,7 +75,11 @@ cask "microsoft-auto-update"
 cask "microsoft-word"
 # Collaboration platform for API development
 cask "postman"
+# IDE for professional Python development
+cask "pycharm"
 # Team communication and collaboration software
 cask "slack"
 # Music streaming service
 cask "spotify"
+# Video communication and virtual meeting platform
+cask "zoom"

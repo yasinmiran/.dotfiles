@@ -53,10 +53,10 @@ EOS
       gco "$ref" &&
       if [[ "$with_upstream" == true ]]; then
         gf "upstream" &&
-          grb "upstream/$ref" &&
+          grb "upstream/$ref" && # git rebase
           echo "You have 5 seconds to cancel push 'origin'" &&
           sleep 5 &&
-          gp "origin" "$ref"
+          gp "origin" "$ref" # git push
       else
         gf "origin" &&
           echo "You have 5 seconds to cancel push 'origin'" &&
