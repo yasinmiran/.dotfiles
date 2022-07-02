@@ -22,6 +22,7 @@
     ~/.zshrc: zsh/zshrc
     ~/.gitconfig: git/gitconfig
     ~/Brewfile: brew/Brewfile
+    ~/.hyper.js: hyper/.hyper.js
 
 - create:
     - ~/development # Projects folder

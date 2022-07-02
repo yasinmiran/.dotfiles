@@ -83,7 +83,7 @@ function atop() {
   if [[ -n "$new_path" ]] && [[ -d "$new_path" ]]; then
     PATH="$PATH:$new_path"
   else
-    echo "Nothing done. Path is invalid!"
+    echo "Nothing done. Path is invalid! ${new_path}"
   fi
 }
 
@@ -129,7 +129,7 @@ readonly sources=(
 # Append binary paths to $PATH.
 atop "/opt/homebrew/bin" # Homebrew Binaries
 atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
-atop "$HOME/.rd/bin" # Rancher Desktop
+# atop "$HOME/.rd/bin" # Rancher Desktop
 
 # New shell prompt message
 
@@ -140,3 +140,5 @@ for sourze in "${sources[@]}"; do
 done
 eval "$PERSONAL_ALIASES"
 echo -e "$USER's zsh environment is ready.\n"
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh

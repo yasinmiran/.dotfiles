@@ -6,10 +6,6 @@ tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
 tap "microsoft/git"
-# Development kit for the Java programming language
-brew "openjdk@11", link: true
-# Programming Language for Network Distributed Applications
-brew "ballerina"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Pack, ship and run any application as a lightweight container
@@ -28,20 +24,14 @@ brew "mas"
 brew "openjdk"
 # Java-based project management
 brew "maven@3.2", link: true
-# Java-based project management
-brew "maven@3.5"
 # Move, copy, append, and link multiple files
 brew "mmv"
-# Ambitious Vim-fork focused on extensibility and agility
-brew "neovim"
 # Port scanning utility for large networks
 brew "nmap"
 # Manage multiple Node.js versions
 brew "nvm"
-# Perl-powered file rename script with many helpful built-ins
-brew "rename"
-# Text replacement utility
-brew "rpl"
+# Development kit for the Java programming language
+brew "openjdk@11", link: true
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Fish-like fast/unobtrusive autosuggestions for zsh
@@ -50,25 +40,14 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 # Vault
 brew "hashicorp/tap/vault", link: false
-# Prebuilt OpenJDK binaries
-cask "adoptopenjdk8"
-# Tools for building Android applications
-cask "android-studio"
-# Free app that makes your Internet safer
-cask "cloudflare-warp"
-# Voice and text chat software
-cask "discord"
 # Web browser
 cask "firefox"
-cask "font-hind"
 # Go (golang) IDE
 cask "goland"
+# Terminal built on web technologies
+cask "hyper"
 # Java IDE by JetBrains
 cask "intellij-idea"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
-# Open-source keystroke visualizer
-cask "keycastr"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Word processor
@@ -77,8 +56,6 @@ cask "microsoft-word"
 cask "postman"
 # IDE for professional Python development
 cask "pycharm"
-# Team communication and collaboration software
-cask "slack"
 # Music streaming service
 cask "spotify"
 # Video communication and virtual meeting platform

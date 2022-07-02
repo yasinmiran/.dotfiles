@@ -70,7 +70,7 @@ export HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-export plugins=(git battery zsh-autosuggestions alias-finder)
+export plugins=(git battery alias-finder)
 export RPROMPT='$(battery_pct_prompt)'
 
 source "$ZSH/oh-my-zsh.sh"
