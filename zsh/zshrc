@@ -62,6 +62,7 @@ alias dt="cd ~/Desktop"             # go to desktop
 alias dev='cd $DEVELOPMENT_DIR'     # go to dev working directory
 alias bins='cd $BINARIES_DIR'       # go to binaries directory
 alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
+alias sed="gsed"
 
 alias ls="exa -laFh --git"  # Override default ls
 alias cls="clear"           # Good old cls
@@ -86,6 +87,19 @@ function atop() {
     echo "Nothing done. Path is invalid! ${new_path}"
   fi
 }
+
+function fast_forward() {
+
+  local in=${1}
+  local out=${2}
+  local crf=${3:-32}
+
+  # ffmpeg -itsscale 0.9523809524 -i $in -c copy $out
+  ffmpeg -i $in -filter:v "setpts=0.1*PTS" -c:v libx264 -preset fast -crf $crf $out
+  # ffmpeg -i $in -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 2 -c:a libopus $out
+  
+}
+
 
 # Abbreviated for: Make directory and Change directory.
 # This function will create the given directory and cd into it immediately.
@@ -128,7 +142,9 @@ readonly sources=(
 
 # Append binary paths to $PATH.
 atop "/opt/homebrew/bin" # Homebrew Binaries
+atop "/opt/homebrew/sbin"
 atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
+atop "$HOME/binaries/flutter/bin"
 # atop "$HOME/.rd/bin" # Rancher Desktop
 
 # New shell prompt message
@@ -142,3 +158,13 @@ eval "$PERSONAL_ALIASES"
 echo -e "$USER's zsh environment is ready.\n"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
+# function change_commit_author() {
+  # Mejabi Oluwadurotimi
+  export duro="Mejabi Oluwadurotimi  <durotimitech@gmail.com>"
+  export ricard="Ricard Helvid Adrian <ricard.helvid@gmail.com>"
+  ## git commit --amend --author=$duro
+# }
+
+export CFLAGS="-arch x86_64 -arch arm64"
