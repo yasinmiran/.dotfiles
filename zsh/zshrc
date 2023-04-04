@@ -64,13 +64,13 @@ alias bins='cd $BINARIES_DIR'       # go to binaries directory
 alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
 alias sed="gsed"
 
-alias ls="exa -laFh --git"  # Override default ls
 alias cls="clear"           # Good old cls
 alias rrr="exec zsh"        # Relaunch zsh
 
-# Since we use oh-my-zsh there will lots of aliases loaded to the env. However,
-# I want some commands the way I want so I'm overriding the similar existing
-# ones with mine. First push all the above aliases and then pop back later.
+# Since we use oh-my-zsh there will lots of aliases loaded to the env.
+# However, I want some commands the way I want so I'm overriding the similar
+# existing ones with mine. First push all the above aliases and then
+# pop back later.
 PERSONAL_ALIASES=$(alias -L)
 
 # ======================================================================================
@@ -144,11 +144,10 @@ readonly sources=(
 atop "/opt/homebrew/bin" # Homebrew Binaries
 atop "/opt/homebrew/sbin"
 atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
-atop "$HOME/binaries/flutter/bin"
+# atop "$HOME/binaries/flutter/bin"
 # atop "$HOME/.rd/bin" # Rancher Desktop
 
 # New shell prompt message
-
 echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
 for sourze in "${sources[@]}"; do
   # shellcheck source=git/defaults
@@ -159,12 +158,10 @@ echo -e "$USER's zsh environment is ready.\n"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# export CFLAGS="-arch x86_64 -arch arm64"
 
-# function change_commit_author() {
-  # Mejabi Oluwadurotimi
-  export duro="Mejabi Oluwadurotimi  <durotimitech@gmail.com>"
-  export ricard="Ricard Helvid Adrian <ricard.helvid@gmail.com>"
-  ## git commit --amend --author=$duro
-# }
-
-export CFLAGS="-arch x86_64 -arch arm64"
+if exists exa; then
+  alias ls="exa -laFh --git"  # Override default ls
+else
+  echo "'exa' is currently unavailable using 'ls' instead."
+fi

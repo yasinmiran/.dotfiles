@@ -1,20 +1,11 @@
-tap "hashicorp/tap"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "microsoft/git"
-# User-friendly launcher for Bazel
-brew "bazelisk"
-# Cross-platform make
-brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
-# Pack, ship and run any application as a lightweight container
-brew "docker"
 # Modern replacement for 'ls'
 brew "exa"
 # Validating, recursive, caching DNS resolver
@@ -23,14 +14,8 @@ brew "unbound"
 brew "gnutls"
 # Subtitle renderer for the ASS/SSA subtitle format
 brew "libass"
-# Secure Reliable Transport
-brew "srt"
-# Play, record, convert, and stream audio and video
-brew "ffmpeg"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg@4"
-# GNU compiler collection
-brew "gcc"
 # Highest-quality GIF encoder based on pngquant
 brew "gifski"
 # Distributed revision control system
@@ -41,62 +26,28 @@ brew "gnu-prolog"
 brew "gnu-sed"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Interpreted, interactive, object-oriented programming language
-brew "python@3.11"
-# Generate introspection data for GObject libraries
-brew "gobject-introspection"
-# Lightweight and flexible command-line JSON processor
-brew "jq"
 # Mac App Store command-line interface
 brew "mas"
-# Development kit for the Java programming language
-brew "openjdk"
-# Java-based project management
-brew "maven@3.2", link: true
-# Move, copy, append, and link multiple files
-brew "mmv"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node"
-# Network Time Protocol (NTP) Distribution
-brew "ntp"
 # Manage multiple Node.js versions
 brew "nvm"
-# Development kit for the Java programming language
-brew "openjdk@11", link: true
-# 📦🚀 Fast, disk space efficient package manager
-brew "pnpm"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.10"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.9"
+brew "python@3.11"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
-# JavaScript package manager
-brew "yarn"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Vault
-brew "hashicorp/tap/vault", link: false
-# Everything you need to get started with Heroku
-brew "heroku/brew/heroku"
-# Tools for building Android applications
-cask "android-studio"
-# Eclipse IDE for Java developers
-cask "eclipse-java"
-# Collaborative team software
-cask "figma"
 # Web browser
-cask "firefox"
-# Go (golang) IDE
-cask "goland"
+cask "google-chrome"
 # Terminal built on web technologies
 cask "hyper"
-# Java IDE by JetBrains
-cask "intellij-idea"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Word processor
@@ -105,24 +56,14 @@ cask "microsoft-word"
 cask "postman"
 # Bridges Proton Mail to email clients supporting IMAP and SMTP protocols
 cask "protonmail-bridge"
-# VPN client focusing on security
-cask "protonvpn"
-# IDE for professional Python development
-cask "pycharm"
 # Music streaming service
 cask "spotify"
 # JDK from the Eclipse Foundation (Adoptium)
-cask "temurin17"
-# JDK from the Eclipse Foundation (Adoptium)
 cask "temurin18"
-# Unpacks archive files
-cask "the-unarchiver"
-# Web browser focusing on security
-cask "tor-browser"
+# Open-source code editor
+cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# JavaScript IDE
-cask "webstorm"
 # Video communication and virtual meeting platform
 cask "zoom"
 # Collect, organize, cite, and share research sources

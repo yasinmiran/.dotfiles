@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+function install_zsh() {
+  readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
+  unset url
+}
+
 # First of all make zsh my default shell.
 if [ "/bin/zsh" != "$(which zsh)" ]; then
   chsh -s "$(which zsh)"
@@ -30,14 +36,13 @@ fi
 
 # Install oh-my-zsh and required extensions.
 if [[ -d "$OMZ_INSTALLATION_PATH" ]]; then
-  echo "Oh-My-Zsh is already installed." &&
-    if ask "Do you want to update it?" Y; then
-      omz update
-    fi
+  echo "Oh-My-Zsh is already installed."
+  if ask "Anyways, do you want to update it?" Y; then
+    command -v omz
+    omz update
+  fi
 else
-  readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-  sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
-  unset url
+  install_zsh
 fi
 
 # Clone auto suggestions for omz.

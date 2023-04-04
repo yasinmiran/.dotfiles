@@ -27,7 +27,6 @@
 - create:
     - ~/development # Projects folder
     - ~/binaries    # Binaries folder
-    - ~/.secrets    # Secrets file
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
