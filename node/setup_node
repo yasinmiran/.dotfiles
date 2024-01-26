@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 
-# First do source the default aliases, exports, functions, and commands
-# to this file to ensure all are loaded.
+# First do source the default aliases, exports,
+# functions, and commands to this file to
+# ensure all are loaded.
 source "$DOTFILES_DIR/node/defaults"
 
 if exists npm; then

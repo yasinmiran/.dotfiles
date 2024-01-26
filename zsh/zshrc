@@ -31,46 +31,40 @@ export BINARIES_DIR="$HOME/binaries"
 export DOTFILES_DIR="$HOME/.dotfiles"
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 
+. $DOTFILES_DIR/zsh/zshenv # Activate the environment for util functions
+
 # Fixes `insecure completion-dependent directories detected` error warning.
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
-# if Java installed via brew, then pick it up from libs and export it's path.
-[ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
-
-# nvm related source loaders
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 # ======================================================================================
 # Aliases
 # ======================================================================================
 
-alias ..="cd .."                    # go back one directory
-alias ...="cd ../.."                # go back two directories
-alias ....="cd ../../.."            # go back four directories
-alias .....="cd ../../../.."        # go back five directories
-alias ......="cd ../../../../.."    # go back six directories
-alias ~="cd ~"                      # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                   # go to old directory == cd $OLDPWD
+alias ..="cd .."                      # go back one directory
+alias ...="cd ../.."                  # go back two directories
+alias ....="cd ../../.."              # go back four directories
+alias .....="cd ../../../.."          # go back five directories
+alias ......="cd ../../../../.."      # go back six directories
+alias .......="cd ../../../../../.."  # go back seven directories
+alias ~="cd ~"                        # go to home but `cd` is probably faster to type.
+alias -- -="cd -"                     # go to old directory == cd $OLDPWD
 
-alias d="cd ~/Documents"            # go to documents
-alias dl="cd ~/Downloads"           # go to downloads
-alias dt="cd ~/Desktop"             # go to desktop
-alias dev='cd $DEVELOPMENT_DIR'     # go to dev working directory
-alias bins='cd $BINARIES_DIR'       # go to binaries directory
-alias dotfiles='cd "$DOTFILES_DIR"' # Go to dotfiles directory
-alias sed="gsed"
+alias d="cd ~/Documents"              # go to documents
+alias dl="cd ~/Downloads"             # go to downloads
+alias dt="cd ~/Desktop"               # go to desktop
+alias dev='cd $DEVELOPMENT_DIR'       # go to dev working directory
+alias bins='cd $BINARIES_DIR'         # go to binaries directory
+alias dotfiles='cd "$DOTFILES_DIR"'   # Go to dotfiles directory
 
-alias cls="clear"           # Good old cls
-alias rrr="exec zsh"        # Relaunch zsh
+alias cls="clear"                     # Good old cls
+alias rrr="exec zsh"                  # Relaunch zsh
 
 # Since we use oh-my-zsh there will lots of aliases loaded to the env.
-# However, I want some commands the way I want so I'm overriding the similar
-# existing ones with mine. First push all the above aliases and then
-# pop back later.
+# However, I want some commands the way I want. So, I'm overriding the
+# similar existing ones with mine. First push all the above aliases
+# and then pop back later.
 PERSONAL_ALIASES=$(alias -L)
 
 # ======================================================================================
@@ -88,21 +82,23 @@ function atop() {
   fi
 }
 
+# ffmpeg fast forward function
+# in=input_file
+# out=output_file
+# crf=constant_rate_factor
 function fast_forward() {
-
   local in=${1}
   local out=${2}
   local crf=${3:-32}
-
-  # ffmpeg -itsscale 0.9523809524 -i $in -c copy $out
   ffmpeg -i $in -filter:v "setpts=0.1*PTS" -c:v libx264 -preset fast -crf $crf $out
+  # ffmpeg -itsscale 0.9523809524 -i $in -c copy $out
   # ffmpeg -i $in -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 2 -c:a libopus $out
-  
 }
 
 
 # Abbreviated for: Make directory and Change directory.
-# This function will create the given directory and cd into it immediately.
+# This function will create the given directory and
+# cd into it immediately.
 function mkcd() {
   echo "Creating directory $1 and navigating you into it." &&
     mkdir -p "$1" && cd "$1" || exit
@@ -122,46 +118,98 @@ function synchronize() {
     brew_dump
 }
 
-# ======================================================================================
-# Default Command Executions
-#
-# Below this section is dedicated to source all the necessary environment and other
-# source files for zsh. Note that some of the oh-my-zsh related ones are also sourced
-# here to ensure consistency across files.
-# ======================================================================================
+function darwin() {
+
+    # Append binary paths to $PATH.
+    atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
+    atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
+    atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
+    # atop "$HOME/binaries/flutter/bin"
+    # atop "$HOME/.rd/bin" # Rancher Desktop
+
+    # export PATH="/Users/yasin/.deta/bin:$PATH"
+    # export PATH="/Users/yasin/.detaspace/bin:$PATH"
+    # export ROBOCODE_HOME="/Users/yasin/robocode"
+    # export CFLAGS="-arch x86_64 -arch arm64"
+
+    # if Java installed via brew, then pick it up from
+    # libs and export it's path.
+    [ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
+
+    # nvm related source loaders
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+    source <(ng completion script) # Load Angular CLI autocompletion.
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # Auto suggestions for ZSH
+    source /Users/yasin/.dotfiles/zsh/completions/supabase.zsh # Auto suggestions for supabase
+
+    alias sed="gsed"
+    alias check="brew search"
+    alias get="brew install"
+    alias j2="jinja2"
+
+    . "$DOTFILES_DIR/brew/defaults"
+
+    alias stfu='osascript -e "set volume output volume 0"'
+    alias vv='osascript -e "set volume output volume 50"'
+    alias vvv='osascript -e "set volume output volume 80"'
+    alias vvvv='osascript -e "set volume output volume 100"'
+    alias mute='osascript -e "set volume input volume 0"'
+    alias unmute='osascript -e "set volume input volume 100"'
+
+}
+
+function linux() {
+
+}
+
+function common() {
+
+    if exists exa; then
+      alias ls="exa -laFh --git"  # Override default ls
+    else
+      echo "'exa' is currently unavailable using 'ls' instead."
+    fi
+
+    . "$DOTFILES_DIR/zsh/oh_my_zsh"
+    . "$DOTFILES_DIR/git/defaults"
+    . "$DOTFILES_DIR/node/defaults"
+
+    alias dlistall="docker ps -a"
+    alias dstart="docker start"
+    alias dstop="docker stop"
+
+    alias mvnci="mvn clean install"
+
+}
+
+# ===================================
+#     Default Command Executions
+# ===================================
 
 readonly sources=(
-  "$DOTFILES_DIR/zsh/oh_my_zsh"
-  "$DOTFILES_DIR/git/defaults"
   "$DOTFILES_DIR/brew/defaults"
-  "$DOTFILES_DIR/node/defaults"
-  "$DOTFILES_DIR/docker/defaults"
   "$DOTFILES_DIR/macos/defaults"
-  # "$DOTFILES_DIR/workplace/wso2"
 )
 
-# Append binary paths to $PATH.
-atop "/opt/homebrew/bin" # Homebrew Binaries
-atop "/opt/homebrew/sbin"
-atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
-# atop "$HOME/binaries/flutter/bin"
-# atop "$HOME/.rd/bin" # Rancher Desktop
+common
 
-# New shell prompt message
-echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
-for sourze in "${sources[@]}"; do
-  # shellcheck source=git/defaults
-  . "$sourze"
-done
+system_type=$(check_system)
+case $system_type in
+    macOS)
+        darwin
+        ;;
+    Linux)
+        linux
+        ;;
+    *)
+        echo "Unsupported system: $system_type"
+        ;;
+esac
+
 eval "$PERSONAL_ALIASES"
+
+echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
 echo -e "$USER's zsh environment is ready.\n"
-
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# export CFLAGS="-arch x86_64 -arch arm64"
-
-if exists exa; then
-  alias ls="exa -laFh --git"  # Override default ls
-else
-  echo "'exa' is currently unavailable using 'ls' instead."
-fi
