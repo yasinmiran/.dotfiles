@@ -3,11 +3,6 @@
 # Using the same configurations from the ZSH shell.
 # I'm not relying on the ZSH specific features.
 
-# Source .zshenv if it exists
-if [ -f "$HOME/.dotfiles/zsh/zshenv" ]; then
-    source "$HOME/.dotfiles/zsh/zshenv"
-fi
-
 # Source .zshrc if it exists
 if [ -f "$HOME/.dotfiles/zsh/zshrc" ]; then
     source "$HOME/.dotfiles/zsh/zshrc"

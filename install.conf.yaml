@@ -18,7 +18,6 @@
 - clean: [ '~' ]
 
 - link:
-    ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
     ~/.gitconfig: git/gitconfig
     ~/.hyper.js: hyper/.hyper.js
@@ -30,6 +29,6 @@
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - ./git/setup_git
     - ./zsh/setup_zsh
+    - ./git/setup_git
     - ./brew/setup_brew

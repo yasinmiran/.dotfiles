@@ -27,21 +27,13 @@
 
 export PATH="$PATH"
 export DOTFILES_DIR="$HOME/.dotfiles"
-export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 export DEVELOPMENT_DIR="$HOME/development"
 export BINARIES_DIR="$HOME/binaries"
-
-# Activate the environment for util functions
-source "$DOTFILES_DIR/zsh/zshenv"
-
+export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 # Fixes `insecure completion-dependent directories detected` error warning.
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
-
-# ======================================================================================
-# Aliases
-# ======================================================================================
 
 alias ..="cd .."                      # go back one directory
 alias ...="cd ../.."                  # go back two directories
@@ -62,15 +54,16 @@ alias dotfiles='cd "$DOTFILES_DIR"'   # Go to dotfiles directory
 alias cls="clear"                     # Good old cls
 alias rrr="exec zsh"                  # Relaunch zsh
 
-# Since we use oh-my-zsh there will lots of aliases loaded to the env.
-# However, I want some commands the way I want. So, I'm overriding the
-# similar existing ones with mine. First push all the above aliases
+# Since we use oh-my-zsh there will lots of aliases
+# loaded to the env. However, I want some commands the
+# way I want. So, I'm overriding the similar existing
+# ones with mine. First push all the above aliases
 # and then pop back later.
-PERSONAL_ALIASES=$(alias -L)
-
-# ======================================================================================
-# Functions
-# ======================================================================================
+if [[ "$(uname)" == "Darwin" ]]; then
+    PERSONAL_ALIASES=$(alias -L)
+else
+    PERSONAL_ALIASES=$(alias -p)
+fi
 
 # Abbreviated for: Append to $PATH.
 # This function will append a path to $PATH and
@@ -84,19 +77,75 @@ function atop() {
   fi
 }
 
-# ffmpeg fast forward function
-# in=input_file
-# out=output_file
-# crf=constant_rate_factor
+# A function that ask a question and waits for a
+# YES or NO answer from the stdin.
+function ask() {
+  local prompt default reply
+  if [[ ${2:-} == 'Y' ]]; then
+    prompt='Y/n'
+    default='Y'
+  elif [[ ${2:-} == 'N' ]]; then
+    prompt='y/N'
+    default='N'
+  else
+    prompt='y/n'
+    default=''
+  fi
+  while true; do
+    # Ask the question (not using "read -p" as
+    # it uses stderr not stdout)
+    echo -n "$1 [$prompt] "
+    # Read the answer (use /dev/tty in case stdin is
+    # redirected from somewhere else)
+    read -r reply </dev/tty
+    # Default?
+    if [[ -z $reply ]]; then
+      reply=$default
+    fi
+    # Check if the reply is valid
+    case "$reply" in
+    Y* | y*) return 0 ;;
+    N* | n*) return 1 ;;
+    esac
+  done
+}
+
+# Check the existence of a passed command but discard
+# the outcome through redirection whether its successful
+# or erroneous. The callee must use the exit code to
+# determine whether its available or not.
+#
+# References:
+# https://askubuntu.com/a/1005292
+# https://tldp.org/LDP/abs/html/io-redirection.html
+#
+# Terminology:
+# File descriptor 0 is the standard input (stdin). [Keyboard]
+# File descriptor 1 is the standard output (stdout). [Display]
+# File descriptor 2 is the standard error (stderr). [Display]
+#
+# Also be worth noting that the same semantics are often
+# achieved with the idiom &>/dev/null
+function exists() {
+  command -v "$1" 1>/dev/null 2>&1
+}
+
+
+# ffmpeg fast forward function in=input_file |
+# out=output_file | crf=constant_rate_factor
 function fast_forward() {
   local in=${1}
   local out=${2}
   local crf=${3:-32}
-  ffmpeg -i $in -filter:v "setpts=0.1*PTS" -c:v libx264 -preset fast -crf $crf $out
+  ffmpeg -i $in \
+    -filter:v "setpts=0.1*PTS" \
+    -c:v libx264 \
+    -preset fast \
+    -crf $crf \
+    $out
   # ffmpeg -itsscale 0.9523809524 -i $in -c copy $out
   # ffmpeg -i $in -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 2 -c:a libopus $out
 }
-
 
 # Abbreviated for: Make directory and Change directory.
 # This function will create the given directory and
@@ -115,9 +164,10 @@ function alf() {
 
 function darwin() {
 
-    . "$DOTFILES_DIR/zsh/oh_my_zsh"
+    echo "Applying your macOS specific configs..."
 
-    # Append binary paths to $PATH.
+    source "$DOTFILES_DIR/zsh/oh_my_zsh"
+
     atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
     atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
     atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
@@ -149,44 +199,39 @@ function darwin() {
     alias mute='osascript -e "set volume input volume 0"'
     alias unmute='osascript -e "set volume input volume 100"'
 
-    # This function is used to synchronize local dotfiles to
-    # this repository files.
+    # This function is used to synchronize local dotfiles
+    # to this repository files.
     function synchronize() {
       echo "Syncing to $DOTFILES_DIR" &&
         brew_dump
     }
-    export -f synchronize
+
+    export -f synchronize &>>/dev/null
 
 }
 
 function linux() {
-    echo "Setting up linux..."
+
+    echo "Applying your Linux specific configs..."
+
 }
 
 function common() {
 
-    if exists exa; then
-      alias ls="exa -laFh --git"
-    else
-      echo "'exa' is currently unavailable using 'ls' instead."
+    if command -v exa &>/dev/null; then
+      function ls() {
+          exa -laFh --git
+      }
+      export -f ls &>>/dev/null
     fi
 
     . "$DOTFILES_DIR/git/defaults"
-
-    # DOCKER
-    # ========================================
 
     alias dlistall="docker ps -a"
     alias dstart="docker start"
     alias dstop="docker stop"
 
-    # MAVEN
-    # ========================================
-
-    alias mvnci="mvn clean install"
-
-    # NODEJS
-    # ========================================
+    alias mvnci="mvn clean install"    # Clean install the project
 
     alias npmg="npm list -g --depth 0" # List all global packages
     alias npmr="npm run"               # run quick
@@ -199,8 +244,9 @@ function common() {
         npm install
     }
 
-    # This is a project specific function that I use mainly for
-    # cleaning up and starting a fresh instance.
+    # This is a project specific function that I
+    # use mainly for cleaning up and starting a
+    # fresh instance.
     function force_clean_and_build() {
       force_clean_packages &&
         npm run build &&
@@ -209,26 +255,14 @@ function common() {
 
 }
 
-# ===================================
-#     Default Command Executions
-# ===================================
-
 common
 
-system_type=$(check_system)
-case $system_type in
-    macOS)
-        darwin
-        ;;
-    Linux)
-        linux
-        ;;
-    *)
-        echo "Unsupported system: $system_type"
-        ;;
-esac
+if [[ "$(uname)" == "Darwin" ]]; then
+    darwin
+else
+    linux
+fi
 
 eval "$PERSONAL_ALIASES"
-
-echo -e "\nA new $(ps -o comm= $$) session created with pid $$"
+echo -e "A new $(ps -o comm= $$) session created with pid $$"
 echo -e "$USER's $(echo $0) environment is ready ✅.\n"

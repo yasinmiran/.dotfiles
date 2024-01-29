@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-source "$DOTFILES_DIR/zsh/zshenv"
-
 function install_zsh() {
   url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
@@ -28,10 +26,8 @@ else
   echo "Hey $USER, zsh is already your default shell :) doing my happy dance..."
 fi
 
-system_type=$(check_system)
-
 # Prompt user to install the XCode Command Line Tools
-if [[ "$system_type" == "macOS" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   if ! xcode-select --print-path &>/dev/null; then
     # Proceed to install if not-installed
     echo "Installing Xcode CLI" &&

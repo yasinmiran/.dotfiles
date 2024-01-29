@@ -8,11 +8,8 @@ ssh-keygen -t ed25519 -C "wytm97@protonmail.com"
 # Start the ssh-agent
 eval "$(ssh-agent -s)"
 
-# Detect the operating system
-OS_TYPE=$(check_system)
-
 # Create config file with necessary settings
-if [[ "$OS_TYPE" == "Darwin" ]]; then
+if [[ "$(uname)" == "Darwin" ]]; then
   # macOS specific SSH config
   cat >~/.ssh/config <<EOF
 Host *
@@ -20,7 +17,7 @@ Host *
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519
 EOF
-elif [[ "$OS_TYPE" == "Linux" ]]; then
+elif [[ "$(uname)" == "Linux" ]]; then
   # Linux specific SSH config
   cat >~/.ssh/config <<EOF
 Host *
@@ -69,7 +66,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
   fi
 fi
 
-if ask "Did you add the key to your GitHub account?"; then
+if ask "Did you add the key to your GitHub account?" Y; then
   echo "Great :) Let me check whether git ssh works..."
   # Test SSH connection, then verify fingerprint and username
   # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
