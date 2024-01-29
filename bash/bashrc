@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 # Using the same configurations from the ZSH shell.
 # Since i'm not heavily relying on the ZSH specific
