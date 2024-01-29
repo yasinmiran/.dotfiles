@@ -110,13 +110,6 @@ function alf() {
     alias-finder -l "$1"
 }
 
-# This function is used to synchronize local dotfiles to
-# this repository files.
-# I have only sync brew related things for now.
-function synchronize() {
-  echo "Syncing to $DOTFILES_DIR" &&
-    brew_dump
-}
 
 function darwin() {
 
@@ -158,6 +151,14 @@ function darwin() {
     alias vvvv='osascript -e "set volume output volume 100"'
     alias mute='osascript -e "set volume input volume 0"'
     alias unmute='osascript -e "set volume input volume 100"'
+
+    # This function is used to synchronize local dotfiles to
+    # this repository files.
+    function synchronize() {
+      echo "Syncing to $DOTFILES_DIR" &&
+        brew_dump
+    }
+    export -f synchronize
 
 }
 

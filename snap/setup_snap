@@ -1,0 +1,74 @@
+#!/usr/bin/env zsh
+
+export SNAPLIST_FILE="Snaplist"
+
+function dump_snap_dependencies() {
+  # Check if snap command is available
+  if ! command -v snap &>/dev/null; then
+    echo "Snap is not installed. Exiting."
+    return 1
+  fi
+  # Dump installed snaps to Snaplist excluding 'snapd'
+  snap list | awk '{if(NR>1 && $1 != "snapd") print $1}' >"$SNAPLIST_FILE"
+  # Check if the file was created and has content
+  if [ -s $SNAPLIST_FILE ]; then
+    echo "Snap dependencies have been dumped to $SNAPLIST_FILE."
+  else
+    echo "Failed to dump Snap dependencies or no snaps are installed."
+    return 1
+  fi
+}
+
+function is_snap_installed() {
+  if command -v snap >/dev/null; then
+    return 0 # Snap is installed
+  else
+    return 1 # Snap is not installed
+  fi
+}
+
+function install_snaps_from_list() {
+  # Check if the Snaplist file exists
+  if [ ! -f "$SNAPLIST_FILE" ]; then
+    echo "$SNAPLIST_FILE does not exist. Please make sure the file is in the current directory."
+    return 1
+  fi
+  # Check if snap command is available
+  if ! command -v snap &>/dev/null; then
+    echo "Snap is not installed. Please install snapd first."
+    return 1
+  fi
+  # Read from the Snaplist file and install each snap
+  while IFS= read -r snap; do
+    if [ -n "$snap" ]; then # Check if the line is not empty
+      echo "Installing $snap..."
+      sudo snap install "$snap"
+    fi
+  done <"$SNAPLIST_FILE"
+  echo "All snaps from $SNAPLIST_FILE have been processed."
+}
+
+# Main script starts here
+if is_snap_installed; then
+  echo "Snap is already installed. Skipping installation."
+else
+  echo "Snap is not installed. Installing Snap..."
+  # Update apt repository
+  echo "Updating apt repository..."
+  sudo apt update
+  # Install snapd (the Snap package manager)
+  echo "Installing snapd..."
+  sudo apt install snapd -y
+  # Verify installation
+  if is_snap_installed; then
+    echo "Snap has been successfully installed."
+    ask
+  else
+    echo "There was an issue installing Snap. Please check the logs above for any errors."
+  fi
+fi
+
+# Now that snapd is ensured to be installed,
+# proceed with installing snaps from the list
+echo "Proceeding with installation of Snap packages from $SNAPLIST_FILE..."
+install_snaps_from_list

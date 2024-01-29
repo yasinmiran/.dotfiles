@@ -158,6 +158,7 @@ cask "webstorm"
 cask "zoom"
 # Collect, organize, cite, and share research sources
 cask "zotero"
+mas "Keynote", id: 409183694
 vscode "adpyke.vscode-sql-formatter"
 vscode "astro-build.astro-vscode"
 vscode "austenc.tailwind-docs"

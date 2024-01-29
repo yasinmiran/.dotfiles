@@ -1,0 +1,31 @@
+# @description: dotbot configuration file.
+#
+# I use this for configuring my Linux machines.
+# Go read the docs: https://github.com/anishathalye/dotbot
+
+- defaults:
+    link:
+      relink: true
+      force: true
+    shell:
+      stdout: true
+      stdin: true
+      stderr: true
+
+- clean: [ '~' ]
+
+- link:
+    ~/.zshenv: zsh/zshenv
+    ~/.zshrc: zsh/zshrc
+    ~/.gitconfig: git/gitconfig
+
+- create:
+    - ~/development # Projects folder
+    - ~/binaries    # Binaries folder
+
+- shell:
+    - [ git submodule update --init --recursive, "Installing submodules" ]
+    - ./zsh/setup_zsh # Setups zsh and its environment.
+    - ./git/setup_git # Setups git.
+    - ./snap/setup_snap # Setups snapd.
+    - ./node/setup_node # Setting up NodeJS and NPM.
