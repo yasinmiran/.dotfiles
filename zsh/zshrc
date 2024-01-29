@@ -185,7 +185,7 @@ function darwin() {
     alias get="brew install"
     alias j2="jinja2"
 
-    . "$DOTFILES_DIR/brew/defaults"
+    source "$DOTFILES_DIR/brew/defaults"
 
     alias stfu='osascript -e "set volume output volume 0"'
     alias vv='osascript -e "set volume output volume 50"'
@@ -209,6 +209,8 @@ function linux() {
 
     echo "Applying your Linux specific configs..."
 
+    source "$DOTFILES_DIR/snap/defaults"
+
 }
 
 function common() {
@@ -220,7 +222,7 @@ function common() {
       export -f ls
     fi
 
-    . "$DOTFILES_DIR/git/defaults"
+    source "$DOTFILES_DIR/git/defaults"
 
     alias dlistall="docker ps -a"
     alias dstart="docker start"
