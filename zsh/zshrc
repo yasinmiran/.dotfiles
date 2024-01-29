@@ -179,7 +179,6 @@ function darwin() {
 
     source <(ng completion script) # Load Angular CLI autocompletion.
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # Auto suggestions for ZSH
-    source /Users/yasin/.dotfiles/zsh/completions/supabase.zsh # Auto suggestions for supabase
 
     alias sed="gsed"
     alias check="brew search"
