@@ -66,12 +66,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
   fi
 fi
 
-if ask "Did you add the key to your GitHub account?" Y; then
-  echo "Great :) Let me check whether git ssh works..."
+function check_if_git_works() {
   # Test SSH connection, then verify fingerprint and username
   # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
   ssh -T git@github.com
-else
-  echo "Okay. Then I cannot check whether git ssh works properly."
-  echo "After you add the key execute: 'ssh -T git@github.com' to see whether its working."
-fi
+}
