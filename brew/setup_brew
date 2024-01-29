@@ -13,7 +13,7 @@ source "$DOTFILES_DIR/brew/defaults"
 # Install homebrew via curl. If brew is already installed then just update
 # the packages and exit.
 # Documentation: https://docs.brew.sh/Installation
-if exists brew; then
+if command -v brew &>/dev/null; then
   echo "Hey $USER, homebrew is already installed :)"
 else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

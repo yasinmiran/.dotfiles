@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 source "$DOTFILES_DIR/zsh/zshrc"
 source "$DOTFILES_DIR/git/defaults"

@@ -11,7 +11,7 @@ function dump_snap_dependencies() {
   # Dump installed snaps to Snaplist excluding 'snapd'
   snap list | awk '{if(NR>1 && $1 != "snapd") print $1}' >"$SNAPLIST_FILE"
   # Check if the file was created and has content
-  if [ -s $SNAPLIST_FILE ]; then
+  if [ -s "$SNAPLIST_FILE" ]; then
     echo "Snap dependencies have been dumped to $SNAPLIST_FILE."
   else
     echo "Failed to dump Snap dependencies or no snaps are installed."

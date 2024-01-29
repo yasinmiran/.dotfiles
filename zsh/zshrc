@@ -1,9 +1,5 @@
 #!/usr/bin/env zsh
 
-# ======================================================================================
-# Exports
-# ======================================================================================
-
 # Some cool shell variables:
 #
 # $COLUMNS        Number of columns to use in Terminal view
@@ -60,9 +56,9 @@ alias rrr="exec zsh"                  # Relaunch zsh
 # ones with mine. First push all the above aliases
 # and then pop back later.
 if [[ "$(uname)" == "Darwin" ]]; then
-    PERSONAL_ALIASES=$(alias -L)
+PERSONAL_ALIASES="$(alias -L)"
 else
-    PERSONAL_ALIASES=$(alias -p)
+PERSONAL_ALIASES="$(alias -p)"
 fi
 
 # Abbreviated for: Append to $PATH.
@@ -206,7 +202,7 @@ function darwin() {
         brew_dump
     }
 
-    export -f synchronize &>>/dev/null
+    export -f synchronize &>/dev/null
 
 }
 
@@ -222,7 +218,7 @@ function common() {
       function ls() {
           exa -laFh --git
       }
-      export -f ls &>>/dev/null
+      export -f ls
     fi
 
     . "$DOTFILES_DIR/git/defaults"
