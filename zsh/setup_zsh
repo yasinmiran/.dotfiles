@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$DOTFILES_DIR/zsh/zshrc"
+
 function install_zsh() {
   url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
