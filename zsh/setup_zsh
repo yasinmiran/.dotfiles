@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-source "$DOTFILES_DIR/zsh/zshrc"
-
 function install_zsh() {
   url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
@@ -53,10 +51,9 @@ fi
 
 # Install oh-my-zsh and required extensions.
 if [[ -d "$OMZ_INSTALLATION_PATH" ]]; then
-  echo "Oh-My-Zsh is already installed."
-  if ask "Anyways, do you want to update it?" Y; then
+  echo "Oh-My-Zsh is already installed. Trying to update..."
+  if command -v omz &>/dev/null; then
     command -v omz
-    omz update
   fi
 else
   install_zsh

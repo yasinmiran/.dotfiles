@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-source "$DOTFILES_DIR/zsh/zshrc"
-source "$DOTFILES_DIR/git/defaults"
-
 # Generate SSH key in default location (~/.ssh/id_ed25519)
 ssh-keygen -t ed25519 -C "wytm97@protonmail.com"
 
