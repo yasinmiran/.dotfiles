@@ -34,45 +34,7 @@ else
   ssh-add ~/.ssh/id_ed25519
 fi
 
-# Copy public key to clipboard
-if [[ "$OS_TYPE" == "Darwin" ]]; then
-  pbcopy <~/.ssh/id_ed25519.pub
-elif [[ "$OS_TYPE" == "Linux" ]]; then
-  # Function to try installing a package, then use it
-  # if the installation succeeds
-  try_install_and_use() {
-    local package=$1
-    local command=$2
-    local args=$3
-    if ! command -v "$command" &>/dev/null; then
-      echo "$command not found. Attempting to install $package..."
-      if sudo apt-get install -y "$package"; then
-        echo "$package successfully installed."
-      else
-        echo "Failed to install $package. Please install it manually."
-        return 1
-      fi
-    fi
-    # Retry the command after installation
-    if command -v "$command" &>/dev/null; then
-      $command "$args" <~/.ssh/id_ed25519.pub
-      echo "I have copied the pub key to your clipboard. Make sure you add it to your GitHub account :)"
-    else
-      echo "Failed to execute $command even after installation."
-    fi
-  }
-  # Try xclip first, then xsel if xclip is not installed or fails
-  if ! try_install_and_use "xclip" "xclip" "-selection clipboard"; then
-    try_install_and_use "xsel" "xsel" "--clipboard"
-  fi
-fi
-
-if ask "Did you add the key to your GitHub account?" Y; then
-  echo "Great :) Let me check whether git ssh works..."
-  # Test SSH connection, then verify fingerprint and username
-  # https://help.github.com/en/github/authenticating-to-github/testing-your-ssh-connection
-  ssh -T git@github.com
-else
-  echo "Okay. Then I cannot check whether git ssh works properly."
-  echo "After you add the key execute: 'ssh -T git@github.com' to see whether its working."
-fi
+echo "Git setup is completed ✅"
+echo "Please add the following public key to GitHub 🐙"
+cat ~/.ssh/id_ed25519.pub
+echo "After you add the key execute: 'ssh -T git@github.com' to see whether its working."
