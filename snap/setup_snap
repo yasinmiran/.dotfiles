@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-export SNAPLIST_FILE="Snaplist"
+export SNAPLIST_FILE="$DOTFILES_DIR/snap/Snaplist"
 
 function dump_snap_dependencies() {
   # Check if snap command is available

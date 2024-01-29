@@ -8,11 +8,24 @@ function install_zsh() {
   unset url
 }
 
-# First of all make zsh my default shell.
+# First of all, make zsh my default shell.
 if [ "/bin/zsh" != "$(which zsh)" ]; then
-  sudo chsh -s "$(which zsh)"
+  # Attempt to change the shell using sudo, capturing any error.
+  if ! sudo chsh -s "$(which zsh)" 2>/dev/null; then
+    # If the first attempt fails, try changing the shell for the current user without sudo
+    if ! chsh -s "$(which zsh)" 2>/dev/null; then
+      # If both attempts fail, provide instructions for manual change
+      echo "Unable to change the default shell automatically."
+      echo "Please change your default shell manually using: chsh -s $(which zsh) or chsh"
+      echo "You might need to enter your password."
+    else
+      echo "Successfully changed the default shell to zsh for $USER."
+    fi
+  else
+    echo "Successfully changed the default shell to zsh with root privileges."
+  fi
 else
-  echo "Hey $USER, zsh is your default shell :) doing my happy dance..."
+  echo "Hey $USER, zsh is already your default shell :) doing my happy dance..."
 fi
 
 system_type=$(check_system)
