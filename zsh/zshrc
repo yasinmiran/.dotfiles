@@ -26,12 +26,13 @@
 # $?              Previous command exit code 0...127
 
 export PATH="$PATH"
-export DEVELOPMENT_DIR="$HOME/development"
-export BINARIES_DIR="$HOME/binaries"
 export DOTFILES_DIR="$HOME/.dotfiles"
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
+export DEVELOPMENT_DIR="$HOME/development"
+export BINARIES_DIR="$HOME/binaries"
 
-. $DOTFILES_DIR/zsh/zshenv # Activate the environment for util functions
+# Activate the environment for util functions
+source "$DOTFILES_DIR/zsh/zshenv"
 
 # Fixes `insecure completion-dependent directories detected` error warning.
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835

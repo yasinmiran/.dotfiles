@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source ./zshenv
+source "$DOTFILE_DIR/zsh/zshenv"
 
 function install_zsh() {
   readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh

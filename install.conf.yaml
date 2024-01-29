@@ -29,6 +29,7 @@
     - ~/binaries    # Binaries folder
 
 - shell:
+    - command: echo "Dotfiles directory is $DOTFILES_DIR"
     - [ git submodule update --init --recursive, "Installing submodules" ]
     - ./zsh/setup_zsh # Setups zsh and the environment.
     - ./brew/setup_brew # Reinstate homebrew.
