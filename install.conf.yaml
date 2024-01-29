@@ -21,16 +21,15 @@
     ~/.zshenv: zsh/zshenv
     ~/.zshrc: zsh/zshrc
     ~/.gitconfig: git/gitconfig
-    ~/Brewfile: brew/Brewfile
     ~/.hyper.js: hyper/.hyper.js
+    ~/Brewfile: brew/Brewfile
 
 - create:
-    - ~/development # Projects folder
-    - ~/binaries    # Binaries folder
+    - ~/development
+    - ~/binaries
 
 - shell:
-    - command: echo "Dotfiles directory is $DOTFILES_DIR"
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - ./zsh/setup_zsh # Setups zsh and the environment.
-    - ./brew/setup_brew # Reinstate homebrew.
-    - ./node/setup_node # Setting up NodeJS and NPM.
+    - ./git/setup_git
+    - ./zsh/setup_zsh
+    - ./brew/setup_brew

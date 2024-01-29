@@ -19,8 +19,8 @@
     ~/.gitconfig: git/gitconfig
 
 - create:
-    - ~/development # Projects folder
-    - ~/binaries    # Binaries folder
+    - ~/development
+    - ~/binaries
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]

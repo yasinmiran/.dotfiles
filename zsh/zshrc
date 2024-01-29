@@ -115,6 +115,8 @@ function alf() {
 
 function darwin() {
 
+    . "$DOTFILES_DIR/zsh/oh_my_zsh"
+
     # Append binary paths to $PATH.
     atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
     atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
@@ -164,20 +166,46 @@ function linux() {
 function common() {
 
     if exists exa; then
-      alias ls="exa -laFh --git"  # Override default ls
+      alias ls="exa -laFh --git"
     else
       echo "'exa' is currently unavailable using 'ls' instead."
     fi
 
-    . "$DOTFILES_DIR/zsh/oh_my_zsh"
     . "$DOTFILES_DIR/git/defaults"
-    . "$DOTFILES_DIR/node/defaults"
+
+    # DOCKER
+    # ========================================
 
     alias dlistall="docker ps -a"
     alias dstart="docker start"
     alias dstop="docker stop"
 
+    # MAVEN
+    # ========================================
+
     alias mvnci="mvn clean install"
+
+    # NODEJS
+    # ========================================
+
+    alias npmg="npm list -g --depth 0" # List all global packages
+    alias npmr="npm run"               # run quick
+    alias npmrs="npm run start"        # npm run start quick
+    alias next_dev="npm run dev:watch" # NextJS site dev
+
+    # NextJS projects only.
+    function force_clean_packages() {
+      rm -rf node_modules package-lock.json .next &&
+        npm install
+    }
+
+    # This is a project specific function that I use mainly for
+    # cleaning up and starting a fresh instance.
+    function force_clean_and_build() {
+      force_clean_packages &&
+        npm run build &&
+        npm run dev:watch
+    }
 
 }
 

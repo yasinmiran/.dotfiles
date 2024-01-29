@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # This file contains the bootstrap logic for homebrew. This shouldn't be called
 # everytime (although its fine). These commands, in this file intended
