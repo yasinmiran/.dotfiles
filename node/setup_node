@@ -8,11 +8,7 @@ if exists npm; then
   # Install global Node packages.
   echo "Installing your Node global packages."
   packages=(
-    create-react-app
     kill-port
-    nodemon
-    ttab
-    vercel
   )
   for package in "${packages[@]}"; do
     npm install --global "$package"

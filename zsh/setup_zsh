@@ -3,14 +3,14 @@
 source "$DOTFILES_DIR/zsh/zshenv"
 
 function install_zsh() {
-  readonly url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  url=https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
   sh -c "$(curl -fsSL $url)" NUL --keep-zshrc
   unset url
 }
 
 # First of all make zsh my default shell.
 if [ "/bin/zsh" != "$(which zsh)" ]; then
-  chsh -s "$(which zsh)"
+  sudo chsh -s "$(which zsh)"
 else
   echo "Hey $USER, zsh is your default shell :) doing my happy dance..."
 fi

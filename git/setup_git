@@ -40,13 +40,31 @@ fi
 if [[ "$OS_TYPE" == "Darwin" ]]; then
   pbcopy <~/.ssh/id_ed25519.pub
 elif [[ "$OS_TYPE" == "Linux" ]]; then
-  # Linux requires xclip or xsel to be installed for clipboard support
-  if command -v xclip >/dev/null; then
-    xclip -selection clipboard <~/.ssh/id_ed25519.pub
-  elif command -v xsel >/dev/null; then
-    xsel --clipboard <~/.ssh/id_ed25519.pub
-  else
-    echo "Clipboard utility not found. Please install xclip or xsel."
+  # Function to try installing a package, then use it
+  # if the installation succeeds
+  try_install_and_use() {
+    local package=$1
+    local command=$2
+    local args=$3
+    if ! command -v "$command" &>/dev/null; then
+      echo "$command not found. Attempting to install $package..."
+      if sudo apt-get install -y "$package"; then
+        echo "$package successfully installed."
+      else
+        echo "Failed to install $package. Please install it manually."
+        return 1
+      fi
+    fi
+    # Retry the command after installation
+    if command -v "$command" &>/dev/null; then
+      $command "$args" <~/.ssh/id_ed25519.pub
+    else
+      echo "Failed to execute $command even after installation."
+    fi
+  }
+  # Try xclip first, then xsel if xclip is not installed or fails
+  if ! try_install_and_use "xclip" "xclip" "-selection clipboard"; then
+    try_install_and_use "xsel" "xsel" "--clipboard"
   fi
 fi
 
