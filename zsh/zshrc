@@ -160,7 +160,7 @@ function darwin() {
 }
 
 function linux() {
-
+    echo "Setting up linux..."
 }
 
 function common() {
