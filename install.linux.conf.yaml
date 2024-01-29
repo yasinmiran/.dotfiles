@@ -15,8 +15,7 @@
 - clean: [ '~' ]
 
 - link:
-    ~/.zshenv: zsh/zshenv
-    ~/.zshrc: zsh/zshrc
+    ~/.bashrc: bash/bashrc
     ~/.gitconfig: git/gitconfig
 
 - create:
@@ -25,7 +24,5 @@
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - ./zsh/setup_zsh # Setups zsh and its environment.
-    - ./git/setup_git # Setups git.
-    - ./snap/setup_snap # Setups snapd.
-    - ./node/setup_node # Setting up NodeJS and NPM.
+    - ./git/setup_git
+    - ./snap/setup_snap

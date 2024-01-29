@@ -185,11 +185,6 @@ function common() {
 #     Default Command Executions
 # ===================================
 
-readonly sources=(
-  "$DOTFILES_DIR/brew/defaults"
-  "$DOTFILES_DIR/macos/defaults"
-)
-
 common
 
 system_type=$(check_system)
@@ -207,5 +202,5 @@ esac
 
 eval "$PERSONAL_ALIASES"
 
-echo -e "\nA new $(ps -o comm= $$) session created with pid $$ | zsh version: $ZSH_VERSION"
-echo -e "$USER's zsh environment is ready.\n"
+echo -e "\nA new $(ps -o comm= $$) session created with pid $$"
+echo -e "$USER's $(echo $0) environment is ready ✅.\n"

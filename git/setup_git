@@ -58,6 +58,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     # Retry the command after installation
     if command -v "$command" &>/dev/null; then
       $command "$args" <~/.ssh/id_ed25519.pub
+      echo "I have copied the pub key to your clipboard. Make sure you add it to your GitHub account :)"
     else
       echo "Failed to execute $command even after installation."
     fi
