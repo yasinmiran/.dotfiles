@@ -24,5 +24,6 @@
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - ./snap/setup_snap
+    - ./bash/setup_bash
     - ./git/setup_git
+    - ./snap/setup_snap
