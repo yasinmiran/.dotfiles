@@ -80,18 +80,6 @@ function is_file() {
   return 0
 }
 
-# FIXME: WIP
-function get_file_extension() {
-  # TODO: Revisit this and implement again.
-  # For example, take filename example.tar.gz
-  # local filename="${FILE%%.*}"             # example
-  # local filename_with_sub_ext="${FILE%.*}" # example.tar
-  # local file_all_ext="${FILE#*.}"          # tar.gz
-  # local file_top_ext="${1##*.}" # gz
-  local filename=$(basename -- "$1")
-  echo "${filename##*.}"
-}
-
 # Find and replace all the strings matching target
 # in a specified file.
 function frepl() {
@@ -100,7 +88,7 @@ function frepl() {
 
 # Change the file type to a executable.
 # Argument 1 will be the relative path of the file.
-function make_executable() {
+function make_exe() {
   local target_file=$1
   chmod +x ."/$target_file"
 }

@@ -71,8 +71,9 @@ PERSONAL_ALIASES=$(alias -L)
 # Functions
 # ======================================================================================
 
-# Abbreviated for: Append to $PATH
-# This function will append a path to $PATH and source the self itself.
+# Abbreviated for: Append to $PATH.
+# This function will append a path to $PATH and
+# source the self itself.
 function atop() {
   local new_path && new_path=${1}
   if [[ -n "$new_path" ]] && [[ -d "$new_path" ]]; then
@@ -117,13 +118,6 @@ function darwin() {
     atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
     atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
     atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
-    # atop "$HOME/binaries/flutter/bin"
-    # atop "$HOME/.rd/bin" # Rancher Desktop
-
-    # export PATH="/Users/yasin/.deta/bin:$PATH"
-    # export PATH="/Users/yasin/.detaspace/bin:$PATH"
-    # export ROBOCODE_HOME="/Users/yasin/robocode"
-    # export CFLAGS="-arch x86_64 -arch arm64"
 
     # if Java installed via brew, then pick it up from
     # libs and export it's path.
