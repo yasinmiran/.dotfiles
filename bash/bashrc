@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
 # Using the same configurations from the ZSH shell.
-# Since i'm not heavily relying on the ZSH specific
-# features, I can use the same configurations.
+# I'm not relying on the ZSH specific features.
 
 # Source .zshenv if it exists
-if [ -f "$DOTFILES_DIR/zsh/zshenv" ]; then
-    source "$DOTFILES_DIR/zsh/zshenv"
+if [ -f "$HOME/.dotfiles/zsh/zshenv" ]; then
+    source "$HOME/.dotfiles/zsh/zshenv"
 fi
 
 # Source .zshrc if it exists
-if [ -f "$DOTFILES_DIR/zsh/zshrc" ]; then
-    source "$DOTFILES_DIR/zsh/zshrc"
+if [ -f "$HOME/.dotfiles/zsh/zshrc" ]; then
+    source "$HOME/.dotfiles/zsh/zshrc"
 fi
