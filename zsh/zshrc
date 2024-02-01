@@ -48,7 +48,6 @@ alias bins='cd $BINARIES_DIR'         # go to binaries directory
 alias dotfiles='cd "$DOTFILES_DIR"'   # Go to dotfiles directory
 
 alias cls="clear"                     # Good old cls
-alias rrr="exec zsh"                  # Relaunch zsh
 
 # Since we use oh-my-zsh there will lots of aliases
 # loaded to the env. However, I want some commands the
@@ -203,6 +202,8 @@ function darwin() {
 
     export -f synchronize &>/dev/null
 
+    alias rrr="exec zsh" # Relaunch zsh
+
 }
 
 function linux() {
@@ -210,6 +211,8 @@ function linux() {
     echo "Applying your Linux specific configs..."
 
     source "$DOTFILES_DIR/snap/defaults"
+    
+    alias rrr="exec bash"
 
 }
 
