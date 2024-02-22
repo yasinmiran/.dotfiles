@@ -42,7 +42,7 @@ function install_snaps_from_list() {
   while IFS= read -r snap; do
     if [ -n "$snap" ]; then # Check if the line is not empty
       echo "Installing $snap..."
-      sudo snap install "$snap"
+      sudo snap install $snap
     fi
   done <"$SNAPLIST_FILE"
   echo "All snaps from $SNAPLIST_FILE have been processed."
