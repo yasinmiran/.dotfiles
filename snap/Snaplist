@@ -8,13 +8,13 @@ cups
 emote
 gnome-3-34-1804
 gnome-42-2204
-goreleaser --classic
+--classic goreleaser
 gtk-common-themes
 hello-world
-intellij-idea-ultimate --classic
+--classic intellij-idea-ultimate
 j2
 pdftk
 --edge podman
-pycharm-community --classic
+--classic pycharm-community
 slack
 vlc
