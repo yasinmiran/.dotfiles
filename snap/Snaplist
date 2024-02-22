@@ -1,5 +1,5 @@
 bare
---edge barrier
+barrier --edge
 chromium
 core
 core18
@@ -8,13 +8,13 @@ cups
 emote
 gnome-3-34-1804
 gnome-42-2204
---classic goreleaser
+goreleaser --classic
 gtk-common-themes
 hello-world
---classic intellij-idea-ultimate
+intellij-idea-ultimate --classic
 j2
 pdftk
---edge podman
---classic pycharm-community
+podman --edge
+pycharm-community --classic
 slack
 vlc
