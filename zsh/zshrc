@@ -38,7 +38,7 @@ alias .....="cd ../../../.."          # go back five directories
 alias ......="cd ../../../../.."      # go back six directories
 alias .......="cd ../../../../../.."  # go back seven directories
 alias ~="cd ~"                        # go to home but `cd` is probably faster to type.
-alias -- -="cd -"                     # go to old directory == cd $OLDPWD
+# alias -- -="cd -"                     # go to old directory == cd $OLDPWD
 
 alias d="cd ~/Documents"              # go to documents
 alias dl="cd ~/Downloads"             # go to downloads
@@ -54,11 +54,11 @@ alias cls="clear"                     # Good old cls
 # way I want. So, I'm overriding the similar existing
 # ones with mine. First push all the above aliases
 # and then pop back later.
-if [[ "$(uname)" == "Darwin" ]]; then
-PERSONAL_ALIASES="$(alias -L)"
-else
-PERSONAL_ALIASES="$(alias -p)"
-fi
+# if [[ "$(uname)" == "Darwin" ]]; then
+# PERSONAL_ALIASES="$(alias -L)"
+# else
+# PERSONAL_ALIASES="$(alias -p)"
+# fi
 
 # Abbreviated for: Append to $PATH.
 # This function will append a path to $PATH and
@@ -207,13 +207,11 @@ function darwin() {
 }
 
 function linux() {
-
     echo "Applying your Linux specific configs..."
-
     source "$DOTFILES_DIR/snap/defaults"
-    
+    # source "/var/snap/openjdk/current/openjdk.env"
+    export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64/"
     alias rrr="exec bash"
-
 }
 
 function common() {
@@ -228,6 +226,7 @@ function common() {
     source "$DOTFILES_DIR/git/defaults"
 
     alias dlistall="docker ps -a"
+    alias dpsa="docker ps -a --no-trunc | less -S"
     alias dstart="docker start"
     alias dstop="docker stop"
 
@@ -266,3 +265,31 @@ fi
 eval "$PERSONAL_ALIASES"
 echo -e "A new $(ps -o comm= $$) session created with pid $$"
 echo -e "$USER's $(echo $0) environment is ready ✅.\n"
+
+function dokcer_jump_to() {
+  docker exec -it $1 "${2:-sh}"
+}
+
+function dlg() {
+  docker logs $1
+}
+
+function docker_stop_all_running_containers() {
+  docker stop $(docker ps -q)
+}
+
+function docker_remove_all_containers() {
+  docker rm -vf $(docker ps -aq)
+}
+
+function docker_remove_all_images() {
+  docker rmi -f $(docker images -aq)
+}
+
+function docker_prune_everything() {
+  docker system prune -a --volumes
+}
+
+function docker_restart() {
+  sudo systemctl restart docker
+}

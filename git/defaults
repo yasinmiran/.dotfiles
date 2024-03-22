@@ -13,6 +13,8 @@ alias hit="git"
 alias gut="git"
 alias got="git"
 
+alias grv="git remote -v"
+alias gst="git status"
 alias gstash="git stash"             # default stash.
 alias gstashall="git stash -u"       # Stash all untracked ones.
 alias gp="git push"                  # default push.
