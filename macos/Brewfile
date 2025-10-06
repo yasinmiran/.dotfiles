@@ -12,7 +12,5 @@ brew "zsh-completions"
 cask "bitwarden"
 # Web browser focusing on privacy
 cask "duckduckgo"
-# Web browser
-cask "google-chrome"
 # Open-source code editor
 cask "visual-studio-code"
