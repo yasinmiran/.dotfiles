@@ -19,16 +19,12 @@
 
 - link:
     ~/.zshrc: zsh/zshrc
-    ~/.gitconfig: git/gitconfig
-    ~/.hyper.js: hyper/.hyper.js
-    ~/Brewfile: brew/Brewfile
+    ~/.gitconfig: macos/gitconfig
+    ~/Brewfile: macos/Brewfile
 
 - create:
-    - ~/development
-    - ~/binaries
+    - ~/dev
 
 - shell:
     - [ git submodule update --init --recursive, "Installing submodules" ]
-    - ./zsh/setup_zsh
-    - ./git/setup_git
-    - ./brew/setup_brew
+    - ./macos/setup.sh

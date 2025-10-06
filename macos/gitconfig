@@ -1,0 +1,11 @@
+# Read the docs: https://git-scm.com/docs/git-config
+
+[user]
+name = Yasin
+email = wytm97@protonmail.com
+
+[init]
+defaultBranch = main
+
+[core]
+autocrlf = input

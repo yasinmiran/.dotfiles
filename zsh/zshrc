@@ -1,68 +1,61 @@
 #!/usr/bin/env zsh
 
-# Some cool shell variables:
-#
-# $COLUMNS        Number of columns to use in Terminal view
-# $DIRSTACK       List of directories used by the pushd and popd commands
-# $GROUPS         Various groups with which the user is associated
-# $HISTFILE       File containing the shell history
-# $HOME           Home directory for the user
-# $HOSTNAME       Name of the system on which the shell is running
-# $LINES          Number of lines currently being used by the shell
-# $PATH           List of directories the shell uses to resolve commands
-# $PS1            String used as the primary prompt
-# $PS2            String used as the secondary prompt
-# $SHELL          Shell program being used
-# $SHELLOPTS      Options in effect for the shell
-# $TERM           Type of terminal that the shell is displaying its content to
-# $UID            User ID of the currently logged-in user
-# $USER           Username of the currently logged-in user
-# $PWD            Present working directory
-# _ (underscore)  Previously executed command
-# $?              Previous command exit code 0...127
-
 export PATH="$PATH"
 export DOTFILES_DIR="$HOME/.dotfiles"
-export DEVELOPMENT_DIR="$HOME/development"
-export BINARIES_DIR="$HOME/binaries"
+export DEVELOPMENT_DIR="$HOME/dev"
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
+
 # Fixes `insecure completion-dependent directories detected` error warning.
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
 
-alias ..="cd .."                      # go back one directory
-alias ...="cd ../.."                  # go back two directories
-alias ....="cd ../../.."              # go back four directories
-alias .....="cd ../../../.."          # go back five directories
-alias ......="cd ../../../../.."      # go back six directories
-alias .......="cd ../../../../../.."  # go back seven directories
-alias ~="cd ~"                        # go to home but `cd` is probably faster to type.
-# alias -- -="cd -"                     # go to old directory == cd $OLDPWD
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+alias .......="cd ../../../../../.."
 
-alias d="cd ~/Documents"              # go to documents
-alias dl="cd ~/Downloads"             # go to downloads
-alias dt="cd ~/Desktop"               # go to desktop
-alias dev='cd $DEVELOPMENT_DIR'       # go to dev working directory
-alias bins='cd $BINARIES_DIR'         # go to binaries directory
-alias dotfiles='cd "$DOTFILES_DIR"'   # Go to dotfiles directory
+alias d="cd ~/Documents"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias dev='cd $DEVELOPMENT_DIR'
+alias bins='cd $BINARIES_DIR'
+alias dotfiles='cd "$DOTFILES_DIR"'
 
-alias cls="clear"                     # Good old cls
+alias cls="clear"
 
-# Since we use oh-my-zsh there will lots of aliases
-# loaded to the env. However, I want some commands the
-# way I want. So, I'm overriding the similar existing
-# ones with mine. First push all the above aliases
-# and then pop back later.
-# if [[ "$(uname)" == "Darwin" ]]; then
-# PERSONAL_ALIASES="$(alias -L)"
-# else
-# PERSONAL_ALIASES="$(alias -p)"
-# fi
+alias fit="git"
+alias hit="git"
+alias gut="git"
+alias got="git"
 
-# Abbreviated for: Append to $PATH.
-# This function will append a path to $PATH and
-# source the self itself.
+alias grv="git remote -v"
+alias gst="git status"
+alias gstash="git stash"     
+alias gstashall="git stash -u"
+alias gp="git push"
+alias gpristinesoft="git clean -dff"
+alias gundo="git reset HEAD~1"
+
+alias stfu='osascript -e "set volume output volume 0"'
+alias vv='osascript -e "set volume output volume 50"'
+alias vvv='osascript -e "set volume output volume 80"'
+alias vvvv='osascript -e "set volume output volume 100"'
+alias mute='osascript -e "set volume input volume 0"'
+alias unmute='osascript -e "set volume input volume 100"'
+
+alias dpsa="docker ps -a --no-trunc | less -S"
+
+alias rrr="exec zsh"
+
+function ls() {
+  exa -laFh --git
+}
+export -f ls
+
+# Append to $PATH.
 function atop() {
   local new_path && new_path=${1}
   if [[ -n "$new_path" ]] && [[ -d "$new_path" ]]; then
@@ -72,224 +65,22 @@ function atop() {
   fi
 }
 
-# A function that ask a question and waits for a
-# YES or NO answer from the stdin.
-function ask() {
-  local prompt default reply
-  if [[ ${2:-} == 'Y' ]]; then
-    prompt='Y/n'
-    default='Y'
-  elif [[ ${2:-} == 'N' ]]; then
-    prompt='y/N'
-    default='N'
-  else
-    prompt='y/n'
-    default=''
-  fi
-  while true; do
-    # Ask the question (not using "read -p" as
-    # it uses stderr not stdout)
-    echo -n "$1 [$prompt] "
-    # Read the answer (use /dev/tty in case stdin is
-    # redirected from somewhere else)
-    read -r reply </dev/tty
-    # Default?
-    if [[ -z $reply ]]; then
-      reply=$default
-    fi
-    # Check if the reply is valid
-    case "$reply" in
-    Y* | y*) return 0 ;;
-    N* | n*) return 1 ;;
-    esac
-  done
-}
+PERSONAL_ALIASES="$(alias -L)"
 
-# Check the existence of a passed command but discard
-# the outcome through redirection whether its successful
-# or erroneous. The callee must use the exit code to
-# determine whether its available or not.
-#
-# References:
-# https://askubuntu.com/a/1005292
-# https://tldp.org/LDP/abs/html/io-redirection.html
-#
-# Terminology:
-# File descriptor 0 is the standard input (stdin). [Keyboard]
-# File descriptor 1 is the standard output (stdout). [Display]
-# File descriptor 2 is the standard error (stderr). [Display]
-#
-# Also be worth noting that the same semantics are often
-# achieved with the idiom &>/dev/null
-function exists() {
-  command -v "$1" 1>/dev/null 2>&1
-}
+source "$DOTFILES_DIR/zsh/oh_my_zsh"
 
+atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
+atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
+atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
 
-# ffmpeg fast forward function in=input_file |
-# out=output_file | crf=constant_rate_factor
-function fast_forward() {
-  local in=${1}
-  local out=${2}
-  local crf=${3:-32}
-  ffmpeg -i $in \
-    -filter:v "setpts=0.1*PTS" \
-    -c:v libx264 \
-    -preset fast \
-    -crf $crf \
-    $out
-  # ffmpeg -itsscale 0.9523809524 -i $in -c copy $out
-  # ffmpeg -i $in -c:v libvpx-vp9 -b:v 0 -crf 30 -pass 2 -c:a libopus $out
-}
+# if Java installed via brew, then pick it up from libs and export it's path.
+[ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
 
-# Abbreviated for: Make directory and Change directory.
-# This function will create the given directory and
-# cd into it immediately.
-function mkcd() {
-  echo "Creating directory $1 and navigating you into it." &&
-    mkdir -p "$1" && cd "$1" || exit
-}
-
-# Find all matching aliases using alias-finder plugin.
-function alf() {
-  echo "Searching for aliases..." &&
-    alias-finder -l "$1"
-}
-
-
-function darwin() {
-
-    echo "Applying your macOS specific configs..."
-
-    source "$DOTFILES_DIR/zsh/oh_my_zsh"
-
-    atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
-    atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
-    atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
-
-    # if Java installed via brew, then pick it up from
-    # libs and export it's path.
-    [ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
-
-    # nvm related source loaders
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-    source <(ng completion script) # Load Angular CLI autocompletion.
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh # Auto suggestions for ZSH
-
-    alias sed="gsed"
-    alias check="brew search"
-    alias get="brew install"
-    alias j2="jinja2"
-
-    source "$DOTFILES_DIR/brew/defaults"
-
-    alias stfu='osascript -e "set volume output volume 0"'
-    alias vv='osascript -e "set volume output volume 50"'
-    alias vvv='osascript -e "set volume output volume 80"'
-    alias vvvv='osascript -e "set volume output volume 100"'
-    alias mute='osascript -e "set volume input volume 0"'
-    alias unmute='osascript -e "set volume input volume 100"'
-
-    # This function is used to synchronize local dotfiles
-    # to this repository files.
-    function synchronize() {
-      echo "Syncing to $DOTFILES_DIR" &&
-        brew_dump
-    }
-
-    export -f synchronize &>/dev/null
-
-    alias rrr="exec zsh" # Relaunch zsh
-
-}
-
-function linux() {
-    echo "Applying your Linux specific configs..."
-    source "$DOTFILES_DIR/snap/defaults"
-    # source "/var/snap/openjdk/current/openjdk.env"
-    export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64/"
-    alias rrr="exec bash"
-}
-
-function common() {
-
-    if command -v exa &>/dev/null; then
-      function ls() {
-          exa -laFh --git
-      }
-      export -f ls
-    fi
-
-    source "$DOTFILES_DIR/git/defaults"
-
-    alias dlistall="docker ps -a"
-    alias dpsa="docker ps -a --no-trunc | less -S"
-    alias dstart="docker start"
-    alias dstop="docker stop"
-
-    alias mvnci="mvn clean install"    # Clean install the project
-
-    alias npmg="npm list -g --depth 0" # List all global packages
-    alias npmr="npm run"               # run quick
-    alias npmrs="npm run start"        # npm run start quick
-    alias next_dev="npm run dev:watch" # NextJS site dev
-
-    # NextJS projects only.
-    function force_clean_packages() {
-      rm -rf node_modules package-lock.json .next &&
-        npm install
-    }
-
-    # This is a project specific function that I
-    # use mainly for cleaning up and starting a
-    # fresh instance.
-    function force_clean_and_build() {
-      force_clean_packages &&
-        npm run build &&
-        npm run dev:watch
-    }
-
-}
-
-common
-
-if [[ "$(uname)" == "Darwin" ]]; then
-    darwin
-else
-    linux
-fi
+# nvm related source loaders
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 eval "$PERSONAL_ALIASES"
 echo -e "A new $(ps -o comm= $$) session created with pid $$"
 echo -e "$USER's $(echo $0) environment is ready ✅.\n"
-
-function dokcer_jump_to() {
-  docker exec -it $1 "${2:-sh}"
-}
-
-function dlg() {
-  docker logs $1
-}
-
-function docker_stop_all_running_containers() {
-  docker stop $(docker ps -q)
-}
-
-function docker_remove_all_containers() {
-  docker rm -vf $(docker ps -aq)
-}
-
-function docker_remove_all_images() {
-  docker rmi -f $(docker images -aq)
-}
-
-function docker_prune_everything() {
-  docker system prune -a --volumes
-}
-
-function docker_restart() {
-  sudo systemctl restart docker
-}
