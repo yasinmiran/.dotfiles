@@ -1,5 +1,1 @@
-# Yasin's `.dotfiles`
-
-```bash
-$ ./install
-```
+# ./install
