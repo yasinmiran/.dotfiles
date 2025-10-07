@@ -12,5 +12,7 @@ brew "zsh-completions"
 cask "bitwarden"
 # Web browser focusing on privacy
 cask "duckduckgo"
+# Go (golang) IDE
+cask "goland"
 # Open-source code editor
 cask "visual-studio-code"

@@ -50,10 +50,7 @@ alias dpsa="docker ps -a --no-trunc | less -S"
 
 alias rrr="exec zsh"
 
-function ls() {
-  exa -laFh --git
-}
-export -f ls
+alias ls="ls -alh " # eza -laFh --git --icons
 
 # Append to $PATH.
 function atop() {
@@ -65,6 +62,11 @@ function atop() {
   fi
 }
 
+function ii() {
+  brew install $1 &&
+    brew bundle dump -v --force --describe
+}
+
 PERSONAL_ALIASES="$(alias -L)"
 
 source "$DOTFILES_DIR/zsh/oh_my_zsh"
@@ -72,6 +74,11 @@ source "$DOTFILES_DIR/zsh/oh_my_zsh"
 atop "/opt/homebrew/bin" # Homebrew system binaries (dynamic)
 atop "/opt/homebrew/sbin" # Homebrew system binaries (static)
 atop "/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # VSCode Shortcut
+
+export GOPATH=$HOME/go
+export GOROOT="$(brew --prefix golang)/libexec"
+atop "${GOPATH}/bin"
+atop "${GOROOT}/bin"
 
 # if Java installed via brew, then pick it up from libs and export it's path.
 [ -d "/usr/libexec/java_home" ] && export JAVA_HOME="$(/usr/libexec/java_home -v1.8)"
