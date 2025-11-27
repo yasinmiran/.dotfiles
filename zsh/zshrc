@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-source ../common.sh
+source $HOME/.dotfiles/common.sh
 
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 

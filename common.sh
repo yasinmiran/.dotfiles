@@ -1,6 +1,6 @@
 export PATH="$PATH"
 export DOTFILES_DIR="$HOME/.dotfiles"
-export DEVELOPMENT_DIR="$HOME/dev"
+export DEVELOPMENT_DIR="$HOME/development"
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -33,7 +33,7 @@ alias gundo="git reset HEAD~1"
 
 alias dpsa="docker ps -a --no-trunc | less -S"
 
-alias rrr="exec zsh"
+alias rrr="exec $0"
 
 alias ls="ls -alh"
 
