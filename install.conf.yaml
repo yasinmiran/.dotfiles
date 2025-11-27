@@ -1,10 +1,5 @@
 # @description: dotbot configuration file.
-#
-# The configuration file is typically written in YAML,
-# but it can also be written in JSON (which is a subset of YAML).
-# JSON configuration files are conventionally named install.zsh.conf.json.
-#
-# Go read the docs: https://github.com/anishathalye/dotbot
+# read the docs: https://github.com/anishathalye/dotbot
 
 - defaults:
     link:

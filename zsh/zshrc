@@ -1,43 +1,13 @@
 #!/usr/bin/env zsh
 
-export PATH="$PATH"
-export DOTFILES_DIR="$HOME/.dotfiles"
-export DEVELOPMENT_DIR="$HOME/dev"
+source ../common.sh
+
 export OMZ_INSTALLATION_PATH="$HOME/.oh-my-zsh"
 
 # Fixes `insecure completion-dependent directories detected` error warning.
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835
 # https://stackoverflow.com/a/61433333
 export ZSH_DISABLE_COMPFIX="true"
-
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
-alias .......="cd ../../../../../.."
-
-alias d="cd ~/Documents"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias dev='cd $DEVELOPMENT_DIR'
-alias bins='cd $BINARIES_DIR'
-alias dotfiles='cd "$DOTFILES_DIR"'
-
-alias cls="clear"
-
-alias fit="git"
-alias hit="git"
-alias gut="git"
-alias got="git"
-
-alias grv="git remote -v"
-alias gst="git status"
-alias gstash="git stash"     
-alias gstashall="git stash -u"
-alias gp="git push"
-alias gpristinesoft="git clean -dff"
-alias gundo="git reset HEAD~1"
 
 alias stfu='osascript -e "set volume output volume 0"'
 alias vv='osascript -e "set volume output volume 50"'
@@ -46,23 +16,7 @@ alias vvvv='osascript -e "set volume output volume 100"'
 alias mute='osascript -e "set volume input volume 0"'
 alias unmute='osascript -e "set volume input volume 100"'
 
-alias dpsa="docker ps -a --no-trunc | less -S"
-
-alias rrr="exec zsh"
-
-alias ls="ls -alh " # eza -laFh --git --icons
-
-# Append to $PATH.
-function atop() {
-  local new_path && new_path=${1}
-  if [[ -n "$new_path" ]] && [[ -d "$new_path" ]]; then
-    PATH="$PATH:$new_path"
-  else
-    echo "Nothing done. Path is invalid! ${new_path}"
-  fi
-}
-
-function ii() {
+function install_and_dump() {
   brew install $1 &&
     brew bundle dump -v --force --describe
 }
