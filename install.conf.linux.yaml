@@ -1,0 +1,24 @@
+# @description: dotbot configuration file for linux
+# read the docs: https://github.com/anishathalye/dotbot
+
+- defaults:
+    link:
+      relink: true
+      force: true
+    shell:
+      stdout: true
+      stdin: true
+      stderr: true
+
+- clean: [ '~' ]
+
+- link:
+    ~/.bashrc: bash/bashrc
+    ~/.gitconfig: macos/gitconfig
+
+- create:
+    - ~/dev
+
+- shell:
+    - [ git submodule update --init --recursive, "Installing submodules" ]
+    - ./bash/setup.sh
